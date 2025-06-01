@@ -1,12 +1,12 @@
 
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Float, Text3D, Center } from '@react-three/drei';
+import { OrbitControls, Float } from '@react-three/drei';
 import { useRef, useMemo } from 'react';
-import { Points, PointMaterial } from 'three';
+import { PointsMaterial } from 'three';
 import * as random from 'maath/random';
 
 function Particles() {
-  const ref = useRef<Points>(null);
+  const ref = useRef<any>(null);
   const sphere = useMemo(() => random.inSphere(new Float32Array(5000), { radius: 1.5 }), []);
   
   return (
@@ -32,47 +32,28 @@ function Particles() {
   );
 }
 
-function FloatingIcons() {
+function FloatingShapes() {
   return (
     <group>
       <Float speed={1.4} rotationIntensity={1} floatIntensity={2}>
-        <Center>
-          <Text3D
-            font="/fonts/helvetiker_regular.typeface.json"
-            size={0.5}
-            height={0.2}
-            curveSegments={12}
-            bevelEnabled
-            bevelThickness={0.02}
-            bevelSize={0.02}
-            bevelOffset={0}
-            bevelSegments={5}
-            position={[-2, 1, 0]}
-          >
-            DATA
-            <meshStandardMaterial color="#12D640" />
-          </Text3D>
-        </Center>
+        <mesh position={[-2, 1, 0]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="#12D640" />
+        </mesh>
       </Float>
       
       <Float speed={1.2} rotationIntensity={1} floatIntensity={1.5}>
-        <Center>
-          <Text3D
-            font="/fonts/helvetiker_regular.typeface.json"
-            size={0.4}
-            height={0.15}
-            curveSegments={12}
-            bevelEnabled
-            bevelThickness={0.02}
-            bevelSize={0.02}
-            bevelOffset={0}
-            bevelSegments={5}
-            position={[2, -1, 0]}
-          >
-            AI
-            <meshStandardMaterial color="#60A5FA" />
-          </Text3D>
-        </Center>
+        <mesh position={[2, -1, 0]}>
+          <sphereGeometry args={[0.5, 32, 32]} />
+          <meshStandardMaterial color="#60A5FA" />
+        </mesh>
+      </Float>
+      
+      <Float speed={1.6} rotationIntensity={0.5} floatIntensity={1}>
+        <mesh position={[0, 0, -1]}>
+          <torusGeometry args={[0.6, 0.2, 16, 100]} />
+          <meshStandardMaterial color="#F59E0B" />
+        </mesh>
       </Float>
     </group>
   );
@@ -85,7 +66,7 @@ export const Hero3D = () => {
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
         <Particles />
-        <FloatingIcons />
+        <FloatingShapes />
         <OrbitControls enableZoom={false} enablePan={false} />
       </Canvas>
     </div>
