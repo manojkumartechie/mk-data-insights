@@ -11,7 +11,7 @@ function Particles() {
   
   return (
     <group rotation={[0, 0, Math.PI / 4]}>
-      <points ref={ref} geometry={undefined}>
+      <points ref={ref}>
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
