@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Float, Text3D, Center } from '@react-three/drei';
 import { useRef, useMemo } from 'react';
 import { Points, PointMaterial } from 'three';
-import * as random from 'maath/random/dist/maath-random.esm';
+import * as random from 'maath/random';
 
 function Particles() {
   const ref = useRef<Points>(null);
@@ -11,15 +11,23 @@ function Particles() {
   
   return (
     <group rotation={[0, 0, Math.PI / 4]}>
-      <Points ref={ref} positions={sphere} stride={3} frustumCulled={false}>
-        <PointMaterial
+      <points ref={ref} geometry={undefined}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            count={sphere.length / 3}
+            array={sphere}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <pointsMaterial
           transparent
           color="#12D640"
           size={0.002}
           sizeAttenuation={true}
           depthWrite={false}
         />
-      </Points>
+      </points>
     </group>
   );
 }
