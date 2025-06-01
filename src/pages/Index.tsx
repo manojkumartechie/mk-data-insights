@@ -125,7 +125,7 @@ const Index = () => {
             transition={{ duration: 1, delay: 0.5 }}
           >
             <motion.img 
-              src="/lovable-uploads/a42375d0-57e6-4f1d-8e1a-544a7db08f0c.png" 
+              src="/lovable-uploads/47058459-6f7e-4d39-bcf6-9b8b0209ffcb.png" 
               alt="Manoj Kumar K" 
               className="w-32 h-32 rounded-full mx-auto mb-8 border-4 border-white/20 shadow-2xl object-cover"
               whileHover={{ scale: 1.1, rotate: 5 }}
@@ -220,7 +220,7 @@ const Index = () => {
                 viewport={{ once: true }}
               >
                 <motion.img 
-                  src="/lovable-uploads/a42375d0-57e6-4f1d-8e1a-544a7db08f0c.png" 
+                  src="/lovable-uploads/47058459-6f7e-4d39-bcf6-9b8b0209ffcb.png" 
                   alt="Manoj Kumar K" 
                   className="rounded-2xl shadow-2xl w-full max-w-md mx-auto object-cover"
                   whileHover={{ scale: 1.05, rotate: 2 }}
