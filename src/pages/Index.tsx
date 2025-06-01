@@ -125,9 +125,9 @@ const Index = () => {
             transition={{ duration: 1, delay: 0.5 }}
           >
             <motion.img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" 
+              src="/lovable-uploads/a42375d0-57e6-4f1d-8e1a-544a7db08f0c.png" 
               alt="Manoj Kumar K" 
-              className="w-32 h-32 rounded-full mx-auto mb-8 border-4 border-white/20 shadow-2xl"
+              className="w-32 h-32 rounded-full mx-auto mb-8 border-4 border-white/20 shadow-2xl object-cover"
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ duration: 0.3 }}
             />
@@ -220,9 +220,9 @@ const Index = () => {
                 viewport={{ once: true }}
               >
                 <motion.img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face" 
+                  src="/lovable-uploads/a42375d0-57e6-4f1d-8e1a-544a7db08f0c.png" 
                   alt="Manoj Kumar K" 
-                  className="rounded-2xl shadow-2xl w-full max-w-md mx-auto"
+                  className="rounded-2xl shadow-2xl w-full max-w-md mx-auto object-cover"
                   whileHover={{ scale: 1.05, rotate: 2 }}
                   transition={{ duration: 0.3 }}
                 />
