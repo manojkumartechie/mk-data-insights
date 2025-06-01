@@ -1,47 +1,15 @@
-import { useEffect, useState } from "react";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, Phone, MapPin, Calendar, ExternalLink, BarChart3, Database, FileText, Code, PieChart, Settings, TestTube } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Hero3D } from "@/components/Hero3D";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { motion } from "framer-motion";
 import { Project3DCard } from "@/components/Project3DCard";
 import { PageTransition } from "@/components/PageTransition";
+import { Navigation } from "@/components/Navigation";
+import { HeroSection } from "@/components/HeroSection";
 
 const Index = () => {
-  const [typedText, setTypedText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(150);
-
-  const words = ["Data Analyst", "Business Intelligence Expert", "Machine Learning Engineer"];
-
-  useEffect(() => {
-    const handleType = () => {
-      const current = loopNum % words.length;
-      const fullText = words[current];
-
-      setTypedText(
-        isDeleting
-          ? fullText.substring(0, typedText.length - 1)
-          : fullText.substring(0, typedText.length + 1)
-      );
-
-      setTypingSpeed(isDeleting ? 30 : 150);
-
-      if (!isDeleting && typedText === fullText) {
-        setTimeout(() => setIsDeleting(true), 500);
-      } else if (isDeleting && typedText === "") {
-        setIsDeleting(false);
-        setLoopNum(loopNum + 1);
-      }
-    };
-
-    const timer = setTimeout(handleType, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [typedText, isDeleting, loopNum, typingSpeed, words]);
-
   const interests = [
     { icon: BarChart3, title: "Data Visualization", color: "text-yellow-500" },
     { icon: Database, title: "Data Modeling", color: "text-blue-500" },
@@ -110,92 +78,14 @@ const Index = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 dark:from-black dark:via-gray-900 dark:to-black transition-colors duration-500">
-        <ThemeToggle />
-        
-        {/* Header with 3D Background */}
-        <header className="relative h-screen flex items-center justify-center text-white overflow-hidden">
-          <Hero3D />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-teal-600/20"></div>
-          
-          <motion.div 
-            className="relative z-10 text-center max-w-4xl mx-auto px-4"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            <motion.img 
-              src="/lovable-uploads/47058459-6f7e-4d39-bcf6-9b8b0209ffcb.png" 
-              alt="Manoj Kumar K" 
-              className="w-32 h-32 rounded-full mx-auto mb-8 border-4 border-white/20 shadow-2xl object-cover"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              transition={{ duration: 0.3 }}
-            />
-            
-            <motion.h1 
-              className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent"
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              Manoj Kumar K
-            </motion.h1>
-            
-            <motion.h2 
-              className="text-2xl md:text-3xl mb-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              I'm a <span className="text-green-400 font-semibold">{typedText}</span>
-              <span className="animate-pulse">|</span>
-            </motion.h2>
-            
-            <motion.p 
-              className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
-            >
-              Resourceful and analytical Data Analyst with expertise in transforming complex data into actionable insights that drive business decisions.
-            </motion.p>
-            
-            <motion.div 
-              className="flex justify-center space-x-6 flex-wrap gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-            >
-              {[
-                { href: "https://www.linkedin.com/in/manojkumartechie/", icon: Linkedin, label: "LinkedIn" },
-                { href: "https://github.com/manojkumartechie", icon: Github, label: "GitHub" },
-                { href: "https://leetcode.com/manojkumartechie/", icon: Code, label: "LeetCode" },
-                { href: "https://www.kaggle.com/manojkumartechie", icon: BarChart3, label: "Kaggle" },
-                { href: "https://drive.google.com/file/d/1I3trn1h04xdu1u-Exw6edlgC1PVmOi22/view?usp=sharing", icon: ExternalLink, label: "Resume" }
-              ].map((link, index) => (
-                <motion.div
-                  key={link.label}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 1.4 + index * 0.1 }}
-                >
-                  <Button asChild variant="outline" size="lg" className="bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-md">
-                    <a href={link.href} target="_blank">
-                      <link.icon className="mr-2 h-5 w-5" />
-                      {link.label}
-                    </a>
-                  </Button>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </header>
+      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-500">
+        <Navigation />
+        <HeroSection />
 
         {/* About Section */}
         <motion.section 
-          className="py-20 px-4 bg-white dark:bg-gray-900 transition-colors duration-500"
+          id="about"
+          className="py-20 px-4 bg-gray-50 dark:bg-gray-800 transition-colors duration-500"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -218,28 +108,13 @@ const Index = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-              >
-                <motion.img 
-                  src="/lovable-uploads/47058459-6f7e-4d39-bcf6-9b8b0209ffcb.png" 
-                  alt="Manoj Kumar K" 
-                  className="rounded-2xl shadow-2xl w-full max-w-md mx-auto object-cover"
-                  whileHover={{ scale: 1.05, rotate: 2 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.div>
-              
-              <motion.div 
                 className="space-y-6"
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
               >
                 <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
                   Experienced in identifying and resolving complex data challenges, delivering actionable insights, and supporting data-driven decision-making. Strong communicator and collaborative team player with proven abilities in Problem Solving, Teamwork, Communication, Time Management, and Continuous Learning.
                 </p>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-4">
                   {[
                     { icon: Calendar, label: "Birthday", value: "02 April 2004" },
                     { icon: Phone, label: "Phone", value: "+91 7826807488" },
@@ -251,7 +126,7 @@ const Index = () => {
                       className="flex items-center space-x-3"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
                       viewport={{ once: true }}
                     >
                       <item.icon className="h-5 w-5 text-blue-600 dark:text-blue-400" />
@@ -260,13 +135,29 @@ const Index = () => {
                   ))}
                 </div>
               </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="flex justify-center"
+              >
+                <motion.img 
+                  src="/lovable-uploads/47058459-6f7e-4d39-bcf6-9b8b0209ffcb.png" 
+                  alt="Manoj Kumar K" 
+                  className="rounded-2xl shadow-2xl w-full max-w-md mx-auto object-cover"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.div>
             </div>
           </div>
         </motion.section>
 
         {/* Interests Section */}
         <motion.section 
-          className="py-20 px-4 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 transition-colors duration-500"
+          className="py-20 px-4 bg-white dark:bg-gray-900 transition-colors duration-500"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -291,14 +182,10 @@ const Index = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  whileHover={{ 
-                    scale: 1.05, 
-                    rotateY: 10,
-                    transition: { duration: 0.3 }
-                  }}
+                  whileHover={{ scale: 1.05 }}
                 >
-                  <Card className="hover:shadow-lg transition-all duration-300 border-0 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm">
-                    <CardContent className="p-6 text-center">
+                  <Card className="hover:shadow-lg transition-all duration-300 text-center h-full">
+                    <CardContent className="p-6">
                       <motion.div
                         whileHover={{ rotate: 360 }}
                         transition={{ duration: 0.6 }}
@@ -316,7 +203,8 @@ const Index = () => {
 
         {/* Skills Section */}
         <motion.section 
-          className="py-20 px-4 bg-white dark:bg-gray-900 transition-colors duration-500"
+          id="skills"
+          className="py-20 px-4 bg-gray-50 dark:bg-gray-800 transition-colors duration-500"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -344,12 +232,12 @@ const Index = () => {
                 >
                   <Card className="border-0 shadow-lg">
                     <CardHeader>
-                      <CardTitle className="text-xl text-blue-900">{category}</CardTitle>
+                      <CardTitle className="text-xl text-blue-900 dark:text-blue-400">{category}</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="flex flex-wrap gap-2">
                         {skillList.map((skill, skillIndex) => (
-                          <Badge key={skillIndex} variant="secondary" className="bg-blue-100 text-blue-800 hover:bg-blue-200 transition-colors">
+                          <Badge key={skillIndex} variant="secondary" className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors">
                             {skill}
                           </Badge>
                         ))}
@@ -364,7 +252,8 @@ const Index = () => {
 
         {/* Projects Section */}
         <motion.section 
-          className="py-20 px-4 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 transition-colors duration-500"
+          id="projects"
+          className="py-20 px-4 bg-white dark:bg-gray-900 transition-colors duration-500"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -405,7 +294,8 @@ const Index = () => {
 
         {/* Contact Section */}
         <motion.section 
-          className="py-20 px-4 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 dark:from-black dark:via-gray-900 dark:to-black text-white transition-colors duration-500"
+          id="contact"
+          className="py-20 px-4 bg-gray-50 dark:bg-gray-800 transition-colors duration-500"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -413,7 +303,7 @@ const Index = () => {
         >
           <div className="max-w-4xl mx-auto">
             <motion.h2 
-              className="text-4xl font-bold text-center mb-16"
+              className="text-4xl font-bold text-center mb-16 text-gray-900 dark:text-white"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -445,13 +335,9 @@ const Index = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  whileHover={{ 
-                    scale: 1.05,
-                    rotateY: 5,
-                    transition: { duration: 0.3 }
-                  }}
+                  whileHover={{ scale: 1.05 }}
                 >
-                  <Card className="bg-white/10 border-white/20 text-white backdrop-blur-md">
+                  <Card className="bg-white dark:bg-gray-900 border shadow-lg">
                     <CardHeader className="text-center">
                       <motion.div
                         whileHover={{ rotate: 360 }}
@@ -459,7 +345,7 @@ const Index = () => {
                       >
                         <item.icon className={`h-8 w-8 mx-auto mb-2 ${item.color}`} />
                       </motion.div>
-                      <CardTitle>{item.title}</CardTitle>
+                      <CardTitle className="text-gray-900 dark:text-white">{item.title}</CardTitle>
                     </CardHeader>
                     <CardContent className="text-center">
                       {item.links ? (
@@ -470,7 +356,7 @@ const Index = () => {
                               whileHover={{ scale: 1.2 }}
                               whileTap={{ scale: 0.9 }}
                             >
-                              <Button asChild variant="ghost" size="sm" className="text-white hover:bg-white/20">
+                              <Button asChild variant="ghost" size="sm">
                                 <a href={link.href} target="_blank">
                                   <link.icon className="h-5 w-5" />
                                 </a>
@@ -479,7 +365,7 @@ const Index = () => {
                           ))}
                         </div>
                       ) : (
-                        <p>{item.content}</p>
+                        <p className="text-gray-600 dark:text-gray-300">{item.content}</p>
                       )}
                     </CardContent>
                   </Card>
@@ -488,6 +374,15 @@ const Index = () => {
             </div>
           </div>
         </motion.section>
+
+        {/* Footer */}
+        <footer className="py-8 px-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+          <div className="max-w-6xl mx-auto text-center">
+            <p className="text-gray-600 dark:text-gray-400">
+              © 2025 Manoj Kumar K. All rights reserved.
+            </p>
+          </div>
+        </footer>
       </div>
     </PageTransition>
   );
