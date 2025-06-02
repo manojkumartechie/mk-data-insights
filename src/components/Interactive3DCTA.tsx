@@ -1,6 +1,6 @@
 
 import { Canvas } from '@react-three/fiber';
-import { Float, Text3D, Center, MeshDistortMaterial, Sphere } from '@react-three/drei';
+import { Float, MeshDistortMaterial, Sphere } from '@react-three/drei';
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { motion } from 'framer-motion';
@@ -32,19 +32,19 @@ function FloatingCTAElements() {
         </Sphere>
       </Float>
       
-      {/* Orbiting elements */}
-      {Array.from({ length: 8 }).map((_, i) => (
+      {/* Simplified orbiting elements */}
+      {Array.from({ length: 6 }).map((_, i) => (
         <Float key={i} speed={1.5 + i * 0.2} rotationIntensity={1} floatIntensity={1.5}>
           <Sphere
             position={[
-              Math.cos((i * Math.PI) / 4) * 3,
-              Math.sin((i * Math.PI) / 4) * 0.5,
-              Math.sin((i * Math.PI) / 4) * 3
+              Math.cos((i * Math.PI) / 3) * 2.5,
+              Math.sin((i * Math.PI) / 3) * 0.3,
+              Math.sin((i * Math.PI) / 3) * 2.5
             ]}
-            args={[0.2]}
+            args={[0.15]}
           >
             <MeshDistortMaterial
-              color={`hsl(${210 + i * 15}, 80%, 60%)`}
+              color={`hsl(${210 + i * 20}, 80%, 60%)`}
               distort={0.3}
               speed={2}
             />
@@ -60,7 +60,19 @@ export const Interactive3DCTA = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
       {/* 3D Background */}
       <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 8] }}>
+        <Canvas 
+          camera={{ position: [0, 0, 8] }}
+          gl={{ 
+            antialias: true, 
+            alpha: true,
+            powerPreference: "high-performance",
+            preserveDrawingBuffer: false,
+            failIfMajorPerformanceCaveat: false
+          }}
+          onCreated={({ gl }) => {
+            gl.setClearColor('#000000', 0);
+          }}
+        >
           <ambientLight intensity={0.4} />
           <pointLight position={[10, 10, 10]} intensity={1} color="#60A5FA" />
           <pointLight position={[-10, -10, -10]} intensity={0.8} color="#F59E0B" />
@@ -70,17 +82,17 @@ export const Interactive3DCTA = () => {
       
       {/* Animated background particles */}
       <div className="absolute inset-0 z-10">
-        {Array.from({ length: 100 }).map((_, i) => (
+        {Array.from({ length: 50 }).map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-30"
             initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
+              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
             }}
             animate={{
-              x: [null, Math.random() * window.innerWidth],
-              y: [null, Math.random() * window.innerHeight],
+              x: [null, Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200)],
+              y: [null, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800)],
               scale: [1, 2, 1],
               opacity: [0.3, 0.8, 0.3],
             }}
@@ -104,7 +116,7 @@ export const Interactive3DCTA = () => {
         >
           {/* Main CTA Heading */}
           <motion.h2
-            className="text-6xl lg:text-8xl font-black text-white mb-8"
+            className="text-4xl sm:text-6xl lg:text-8xl font-black text-white mb-8"
             style={{
               background: "linear-gradient(45deg, #60A5FA, #F59E0B, #12D640, #EF4444)",
               backgroundSize: "400% 400%",
@@ -124,7 +136,7 @@ export const Interactive3DCTA = () => {
           
           {/* Subtitle */}
           <motion.p
-            className="text-2xl lg:text-3xl text-blue-100 leading-relaxed max-w-4xl mx-auto"
+            className="text-xl lg:text-3xl text-blue-100 leading-relaxed max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
@@ -134,7 +146,7 @@ export const Interactive3DCTA = () => {
           
           {/* Interactive CTA Buttons */}
           <motion.div
-            className="flex flex-wrap gap-8 justify-center"
+            className="flex flex-col sm:flex-row flex-wrap gap-6 sm:gap-8 justify-center"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1, duration: 0.6, type: "spring" }}
@@ -159,17 +171,17 @@ export const Interactive3DCTA = () => {
               <Button 
                 asChild 
                 size="lg" 
-                className="bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 hover:from-blue-600 hover:via-purple-600 hover:to-cyan-600 text-white font-bold px-12 py-6 text-xl shadow-2xl border-0 rounded-2xl"
+                className="w-full sm:w-auto bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 hover:from-blue-600 hover:via-purple-600 hover:to-cyan-600 text-white font-bold px-8 sm:px-12 py-6 text-lg sm:text-xl shadow-2xl border-0 rounded-2xl"
               >
                 <a href="#contact">
                   <motion.div
                     animate={{ rotate: [0, 360] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                   >
-                    <Rocket className="mr-4 h-8 w-8" />
+                    <Rocket className="mr-3 sm:mr-4 h-6 sm:h-8 w-6 sm:w-8" />
                   </motion.div>
                   Start Your Data Journey
-                  <ArrowRight className="ml-4 h-8 w-8" />
+                  <ArrowRight className="ml-3 sm:ml-4 h-6 sm:h-8 w-6 sm:w-8" />
                 </a>
               </Button>
             </motion.div>
@@ -195,17 +207,17 @@ export const Interactive3DCTA = () => {
                 asChild 
                 variant="outline" 
                 size="lg" 
-                className="border-4 border-green-400 bg-green-400/10 hover:bg-green-400 hover:text-gray-900 text-green-100 font-bold px-12 py-6 text-xl shadow-2xl rounded-2xl backdrop-blur-md"
+                className="w-full sm:w-auto border-4 border-green-400 bg-green-400/10 hover:bg-green-400 hover:text-gray-900 text-green-100 font-bold px-8 sm:px-12 py-6 text-lg sm:text-xl shadow-2xl rounded-2xl backdrop-blur-md"
               >
                 <a href="#projects">
                   <motion.div
                     animate={{ scale: [1, 1.3, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
-                    <Sparkles className="mr-4 h-8 w-8" />
+                    <Sparkles className="mr-3 sm:mr-4 h-6 sm:h-8 w-6 sm:w-8" />
                   </motion.div>
                   Explore My Work
-                  <Zap className="ml-4 h-8 w-8" />
+                  <Zap className="ml-3 sm:ml-4 h-6 sm:h-8 w-6 sm:w-8" />
                 </a>
               </Button>
             </motion.div>
@@ -213,7 +225,7 @@ export const Interactive3DCTA = () => {
           
           {/* Floating Action Indicators */}
           <motion.div
-            className="flex justify-center space-x-16 mt-16"
+            className="flex flex-wrap justify-center gap-8 sm:gap-16 mt-16"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 1 }}
@@ -239,8 +251,8 @@ export const Interactive3DCTA = () => {
                 }}
                 whileHover={{ scale: 1.3, y: -20 }}
               >
-                <div className="text-4xl mb-2">{item.icon}</div>
-                <p className="text-blue-200 font-semibold">{item.text}</p>
+                <div className="text-3xl sm:text-4xl mb-2">{item.icon}</div>
+                <p className="text-blue-200 font-semibold text-sm sm:text-base">{item.text}</p>
               </motion.div>
             ))}
           </motion.div>
