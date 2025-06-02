@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -8,6 +7,7 @@ import { Project3DCard } from "@/components/Project3DCard";
 import { PageTransition } from "@/components/PageTransition";
 import { Navigation } from "@/components/Navigation";
 import { HeroSection } from "@/components/HeroSection";
+import { Interactive3DCTA } from "@/components/Interactive3DCTA";
 
 const Index = () => {
   const interests = [
@@ -81,6 +81,9 @@ const Index = () => {
       <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-500">
         <Navigation />
         <HeroSection />
+        
+        {/* New Interactive 3D CTA Section */}
+        <Interactive3DCTA />
 
         {/* About Section with enhanced animations */}
         <motion.section 
