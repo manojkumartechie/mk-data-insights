@@ -3,7 +3,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Github, Linkedin, Mail, Code, BarChart3 } from "lucide-react";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,19 +17,20 @@ export const Navigation = () => {
 
   return (
     <motion.nav 
-      className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-lg"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <motion.div 
             className="flex-shrink-0"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.1, rotate: 2 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <span className="text-xl font-bold text-gray-900 dark:text-white">
+            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Manoj Kumar K
             </span>
           </motion.div>
@@ -38,13 +38,16 @@ export const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              {navItems.map((item) => (
+              {navItems.map((item, index) => (
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                  whileHover={{ scale: 1.05 }}
+                  className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300"
+                  whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
                 >
                   {item.label}
                 </motion.a>
@@ -53,46 +56,50 @@ export const Navigation = () => {
           </div>
 
           {/* Right side buttons */}
-          <div className="hidden md:flex items-center space-x-4">
-            <div className="flex space-x-2">
-              <Button asChild variant="ghost" size="sm">
-                <a href="https://github.com/manojkumartechie" target="_blank">
-                  <Github className="h-4 w-4" />
-                </a>
-              </Button>
-              <Button asChild variant="ghost" size="sm">
-                <a href="https://www.linkedin.com/in/manojkumartechie/" target="_blank">
-                  <Linkedin className="h-4 w-4" />
-                </a>
-              </Button>
-              <Button asChild variant="ghost" size="sm">
-                <a href="https://leetcode.com/manojkumartechie/" target="_blank">
-                  <Code className="h-4 w-4" />
-                </a>
-              </Button>
-              <Button asChild variant="ghost" size="sm">
-                <a href="https://www.kaggle.com/manojkumartechie" target="_blank">
-                  <BarChart3 className="h-4 w-4" />
-                </a>
-              </Button>
-              <Button asChild variant="ghost" size="sm">
-                <a href="mailto:manojkumar9384@outlook.com">
-                  <Mail className="h-4 w-4" />
-                </a>
-              </Button>
-            </div>
-            <ThemeToggle />
+          <div className="hidden md:flex items-center space-x-2">
+            {[
+              { href: "https://github.com/manojkumartechie", icon: Github },
+              { href: "https://www.linkedin.com/in/manojkumartechie/", icon: Linkedin },
+              { href: "https://leetcode.com/manojkumartechie/", icon: Code },
+              { href: "https://www.kaggle.com/manojkumartechie", icon: BarChart3 },
+              { href: "mailto:manojkumar9384@outlook.com", icon: Mail }
+            ].map((social, index) => (
+              <motion.div
+                key={social.href}
+                whileHover={{ scale: 1.2, rotate: 10 }}
+                whileTap={{ scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 + index * 0.1, type: "spring" }}
+              >
+                <Button asChild variant="ghost" size="sm" className="hover:bg-blue-100 dark:hover:bg-blue-900">
+                  <a href={social.href} target="_blank">
+                    <social.icon className="h-4 w-4" />
+                  </a>
+                </Button>
+              </motion.div>
+            ))}
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsOpen(!isOpen)}
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <motion.div
+                  animate={{ rotate: isOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                </motion.div>
+              </Button>
+            </motion.div>
           </div>
         </div>
 
@@ -103,45 +110,46 @@ export const Navigation = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {navItems.map((item) => (
-                <a
+              {navItems.map((item, index) => (
+                <motion.a
                   key={item.label}
                   href={item.href}
-                  className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium"
                   onClick={() => setIsOpen(false)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ x: 10 }}
                 >
                   {item.label}
-                </a>
+                </motion.a>
               ))}
               <div className="flex space-x-2 px-3 py-2">
-                <Button asChild variant="ghost" size="sm">
-                  <a href="https://github.com/manojkumartechie" target="_blank">
-                    <Github className="h-4 w-4" />
-                  </a>
-                </Button>
-                <Button asChild variant="ghost" size="sm">
-                  <a href="https://www.linkedin.com/in/manojkumartechie/" target="_blank">
-                    <Linkedin className="h-4 w-4" />
-                  </a>
-                </Button>
-                <Button asChild variant="ghost" size="sm">
-                  <a href="https://leetcode.com/manojkumartechie/" target="_blank">
-                    <Code className="h-4 w-4" />
-                  </a>
-                </Button>
-                <Button asChild variant="ghost" size="sm">
-                  <a href="https://www.kaggle.com/manojkumartechie" target="_blank">
-                    <BarChart3 className="h-4 w-4" />
-                  </a>
-                </Button>
-                <Button asChild variant="ghost" size="sm">
-                  <a href="mailto:manojkumar9384@outlook.com">
-                    <Mail className="h-4 w-4" />
-                  </a>
-                </Button>
-                <ThemeToggle />
+                {[
+                  { href: "https://github.com/manojkumartechie", icon: Github },
+                  { href: "https://www.linkedin.com/in/manojkumartechie/", icon: Linkedin },
+                  { href: "https://leetcode.com/manojkumartechie/", icon: Code },
+                  { href: "https://www.kaggle.com/manojkumartechie", icon: BarChart3 },
+                  { href: "mailto:manojkumar9384@outlook.com", icon: Mail }
+                ].map((social, index) => (
+                  <motion.div
+                    key={social.href}
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.3 + index * 0.1 }}
+                  >
+                    <Button asChild variant="ghost" size="sm">
+                      <a href={social.href} target="_blank">
+                        <social.icon className="h-4 w-4" />
+                      </a>
+                    </Button>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </motion.div>
