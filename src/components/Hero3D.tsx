@@ -1,6 +1,6 @@
 
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Float, Sphere, MeshDistortMaterial, Text3D, Center } from '@react-three/drei';
+import { OrbitControls, Float, Sphere, MeshDistortMaterial } from '@react-three/drei';
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as random from 'maath/random';
@@ -8,7 +8,7 @@ import * as THREE from 'three';
 
 function AnimatedParticles() {
   const ref = useRef<any>(null);
-  const sphere = useMemo(() => random.inSphere(new Float32Array(8000), { radius: 2.5 }), []);
+  const sphere = useMemo(() => random.inSphere(new Float32Array(5000), { radius: 2.5 }), []);
   
   useFrame((state, delta) => {
     if (ref.current) {
@@ -72,10 +72,9 @@ function FloatingShapes() {
     <group>
       <Float speed={2} rotationIntensity={2} floatIntensity={3}>
         <mesh ref={meshRef1} position={[-3, 0, -1]}>
-          <dodecahedronGeometry args={[0.8, 0]} />
+          <boxGeometry args={[0.8, 0.8, 0.8]} />
           <MeshDistortMaterial
             color="#12D640"
-            attach="material"
             distort={0.3}
             speed={2}
           />
@@ -84,10 +83,9 @@ function FloatingShapes() {
       
       <Float speed={1.8} rotationIntensity={1.5} floatIntensity={2}>
         <mesh ref={meshRef2} position={[3, -0.5, 0]}>
-          <octahedronGeometry args={[1, 0]} />
+          <sphereGeometry args={[1, 16, 16]} />
           <MeshDistortMaterial
             color="#60A5FA"
-            attach="material"
             distort={0.4}
             speed={1.5}
           />
@@ -96,10 +94,9 @@ function FloatingShapes() {
       
       <Float speed={2.2} rotationIntensity={1} floatIntensity={2.5}>
         <mesh ref={meshRef3} position={[0, 1.5, -2]}>
-          <icosahedronGeometry args={[0.6, 0]} />
+          <tetrahedronGeometry args={[0.6]} />
           <MeshDistortMaterial
             color="#F59E0B"
-            attach="material"
             distort={0.5}
             speed={3}
           />
@@ -108,30 +105,29 @@ function FloatingShapes() {
       
       <Float speed={1.6} rotationIntensity={0.8} floatIntensity={1.8}>
         <mesh ref={meshRef4} position={[-1.5, -1, 1]}>
-          <tetrahedronGeometry args={[0.7, 0]} />
+          <coneGeometry args={[0.7, 1.5, 8]} />
           <MeshDistortMaterial
             color="#EF4444"
-            attach="material"
             distort={0.2}
             speed={2.5}
           />
         </mesh>
       </Float>
       
-      {/* Additional smaller floating elements */}
-      {Array.from({ length: 12 }).map((_, i) => (
+      {/* Simplified floating elements */}
+      {Array.from({ length: 8 }).map((_, i) => (
         <Float key={i} speed={1 + Math.random()} rotationIntensity={Math.random() * 2} floatIntensity={Math.random() * 3}>
           <Sphere
             position={[
-              (Math.random() - 0.5) * 8,
               (Math.random() - 0.5) * 6,
-              (Math.random() - 0.5) * 4
+              (Math.random() - 0.5) * 4,
+              (Math.random() - 0.5) * 3
             ]}
-            args={[0.1 + Math.random() * 0.3]}
+            args={[0.1 + Math.random() * 0.2]}
           >
             <MeshDistortMaterial
               color={`hsl(${Math.random() * 360}, 70%, 60%)`}
-              distort={0.1 + Math.random() * 0.3}
+              distort={0.1 + Math.random() * 0.2}
               speed={1 + Math.random() * 2}
             />
           </Sphere>
@@ -178,7 +174,12 @@ export const Hero3D = () => {
         gl={{ 
           antialias: true, 
           alpha: true,
-          powerPreference: "high-performance"
+          powerPreference: "high-performance",
+          preserveDrawingBuffer: false,
+          failIfMajorPerformanceCaveat: false
+        }}
+        onCreated={({ gl }) => {
+          gl.setClearColor('#000000', 0);
         }}
       >
         <DynamicLighting />
