@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Zap, Sparkles, Rocket } from 'lucide-react';
 
-function FloatingCTAElements() {
+function SimpleCTAElements() {
   const groupRef = useRef<any>(null);
   
   useFrame((state) => {
@@ -19,38 +19,37 @@ function FloatingCTAElements() {
   
   return (
     <group ref={groupRef}>
-      {/* Central floating sphere with pulsing effect */}
       <Float speed={2} rotationIntensity={1} floatIntensity={2}>
         <Sphere position={[0, 0, 0]} args={[0.8]}>
           <MeshDistortMaterial
             color="#3B82F6"
-            distort={0.6}
-            speed={3}
+            distort={0.4}
+            speed={2}
             transparent
-            opacity={0.8}
+            opacity={0.7}
           />
         </Sphere>
       </Float>
       
-      {/* Simplified orbiting elements */}
-      {Array.from({ length: 6 }).map((_, i) => (
-        <Float key={i} speed={1.5 + i * 0.2} rotationIntensity={1} floatIntensity={1.5}>
-          <Sphere
-            position={[
-              Math.cos((i * Math.PI) / 3) * 2.5,
-              Math.sin((i * Math.PI) / 3) * 0.3,
-              Math.sin((i * Math.PI) / 3) * 2.5
-            ]}
-            args={[0.15]}
-          >
-            <MeshDistortMaterial
-              color={`hsl(${210 + i * 20}, 80%, 60%)`}
-              distort={0.3}
-              speed={2}
-            />
-          </Sphere>
-        </Float>
-      ))}
+      <Float speed={1.5} rotationIntensity={0.8} floatIntensity={1.5}>
+        <Sphere position={[-1.5, 0.5, -1]} args={[0.3]}>
+          <MeshDistortMaterial
+            color="#10B981"
+            distort={0.2}
+            speed={1.5}
+          />
+        </Sphere>
+      </Float>
+      
+      <Float speed={1.8} rotationIntensity={1.2} floatIntensity={1.8}>
+        <Sphere position={[1.5, -0.5, 1]} args={[0.4]}>
+          <MeshDistortMaterial
+            color="#F59E0B"
+            distort={0.3}
+            speed={1.8}
+          />
+        </Sphere>
+      </Float>
     </group>
   );
 }
@@ -58,31 +57,29 @@ function FloatingCTAElements() {
 export const Interactive3DCTA = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
-      {/* 3D Background */}
+      {/* Simplified 3D Background */}
       <div className="absolute inset-0 z-0">
         <Canvas 
-          camera={{ position: [0, 0, 8] }}
+          camera={{ position: [0, 0, 6] }}
           gl={{ 
-            antialias: true, 
+            antialias: false, 
             alpha: true,
-            powerPreference: "high-performance",
-            preserveDrawingBuffer: false,
-            failIfMajorPerformanceCaveat: false
+            powerPreference: "default"
           }}
           onCreated={({ gl }) => {
             gl.setClearColor('#000000', 0);
           }}
         >
           <ambientLight intensity={0.4} />
-          <pointLight position={[10, 10, 10]} intensity={1} color="#60A5FA" />
-          <pointLight position={[-10, -10, -10]} intensity={0.8} color="#F59E0B" />
-          <FloatingCTAElements />
+          <pointLight position={[5, 5, 5]} intensity={0.8} color="#60A5FA" />
+          <pointLight position={[-5, -5, -5]} intensity={0.6} color="#F59E0B" />
+          <SimpleCTAElements />
         </Canvas>
       </div>
       
       {/* Animated background particles */}
       <div className="absolute inset-0 z-10">
-        {Array.from({ length: 50 }).map((_, i) => (
+        {Array.from({ length: 20 }).map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-30"
@@ -93,8 +90,8 @@ export const Interactive3DCTA = () => {
             animate={{
               x: [null, Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200)],
               y: [null, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800)],
-              scale: [1, 2, 1],
-              opacity: [0.3, 0.8, 0.3],
+              scale: [1, 1.5, 1],
+              opacity: [0.3, 0.6, 0.3],
             }}
             transition={{
               duration: Math.random() * 8 + 5,
