@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Download, ExternalLink, Github, Linkedin } from "lucide-react";
+import { Download, ExternalLink, Github, Linkedin, Code, BarChart3 } from "lucide-react";
 
 export const HeroSection = () => {
   const [typedText, setTypedText] = useState("");
@@ -40,13 +40,13 @@ export const HeroSection = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center pt-16 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left side - Text content */}
+        <div className="flex items-center justify-center">
+          {/* Centered content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-6"
+            className="text-center space-y-6 max-w-4xl"
           >
             <motion.h1 
               className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white"
@@ -74,7 +74,7 @@ export const HeroSection = () => {
             </motion.h2>
             
             <motion.p 
-              className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl"
+              className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -83,7 +83,7 @@ export const HeroSection = () => {
             </motion.p>
             
             <motion.div 
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap gap-4 justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
@@ -103,14 +103,16 @@ export const HeroSection = () => {
             </motion.div>
 
             <motion.div 
-              className="flex space-x-4"
+              className="flex justify-center space-x-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1 }}
             >
               {[
                 { href: "https://github.com/manojkumartechie", icon: Github },
-                { href: "https://www.linkedin.com/in/manojkumartechie/", icon: Linkedin }
+                { href: "https://www.linkedin.com/in/manojkumartechie/", icon: Linkedin },
+                { href: "https://leetcode.com/manojkumartechie/", icon: Code },
+                { href: "https://www.kaggle.com/manojkumartechie", icon: BarChart3 }
               ].map((social, index) => (
                 <motion.div
                   key={social.href}
@@ -124,31 +126,6 @@ export const HeroSection = () => {
                   </Button>
                 </motion.div>
               ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Right side - Profile image */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex justify-center lg:justify-end"
-          >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-              className="relative"
-            >
-              <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl border-8 border-white dark:border-gray-700">
-                <img 
-                  src="/lovable-uploads/47058459-6f7e-4d39-bcf6-9b8b0209ffcb.png" 
-                  alt="Manoj Kumar K" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-8 h-8 bg-blue-600 rounded-full animate-pulse"></div>
-              <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-green-600 rounded-full animate-pulse delay-300"></div>
             </motion.div>
           </motion.div>
         </div>

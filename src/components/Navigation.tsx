@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Github, Linkedin, Mail } from "lucide-react";
+import { Menu, X, Github, Linkedin, Mail, Code, BarChart3 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const Navigation = () => {
@@ -66,6 +66,16 @@ export const Navigation = () => {
                 </a>
               </Button>
               <Button asChild variant="ghost" size="sm">
+                <a href="https://leetcode.com/manojkumartechie/" target="_blank">
+                  <Code className="h-4 w-4" />
+                </a>
+              </Button>
+              <Button asChild variant="ghost" size="sm">
+                <a href="https://www.kaggle.com/manojkumartechie" target="_blank">
+                  <BarChart3 className="h-4 w-4" />
+                </a>
+              </Button>
+              <Button asChild variant="ghost" size="sm">
                 <a href="mailto:manojkumar9384@outlook.com">
                   <Mail className="h-4 w-4" />
                 </a>
@@ -114,6 +124,16 @@ export const Navigation = () => {
                 <Button asChild variant="ghost" size="sm">
                   <a href="https://www.linkedin.com/in/manojkumartechie/" target="_blank">
                     <Linkedin className="h-4 w-4" />
+                  </a>
+                </Button>
+                <Button asChild variant="ghost" size="sm">
+                  <a href="https://leetcode.com/manojkumartechie/" target="_blank">
+                    <Code className="h-4 w-4" />
+                  </a>
+                </Button>
+                <Button asChild variant="ghost" size="sm">
+                  <a href="https://www.kaggle.com/manojkumartechie" target="_blank">
+                    <BarChart3 className="h-4 w-4" />
                   </a>
                 </Button>
                 <Button asChild variant="ghost" size="sm">
