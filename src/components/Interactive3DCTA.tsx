@@ -1,6 +1,5 @@
 
 import { Canvas } from '@react-three/fiber';
-import { Float, MeshDistortMaterial, Sphere } from '@react-three/drei';
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { motion } from 'framer-motion';
@@ -20,37 +19,28 @@ function SimpleCTAElements() {
   
   return (
     <group ref={groupRef}>
-      <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-        <Sphere position={[0, 0, 0]} args={[0.8]}>
-          <MeshDistortMaterial
-            color="#3B82F6"
-            distort={0.4}
-            speed={2}
-            transparent
-            opacity={0.7}
-          />
-        </Sphere>
-      </Float>
+      <mesh position={[0, 0, 0]}>
+        <sphereGeometry args={[0.8]} />
+        <meshStandardMaterial
+          color="#3B82F6"
+          transparent
+          opacity={0.7}
+        />
+      </mesh>
       
-      <Float speed={1.5} rotationIntensity={0.8} floatIntensity={1.5}>
-        <Sphere position={[-1.5, 0.5, -1]} args={[0.3]}>
-          <MeshDistortMaterial
-            color="#10B981"
-            distort={0.2}
-            speed={1.5}
-          />
-        </Sphere>
-      </Float>
+      <mesh position={[-1.5, 0.5, -1]}>
+        <sphereGeometry args={[0.3]} />
+        <meshStandardMaterial
+          color="#10B981"
+        />
+      </mesh>
       
-      <Float speed={1.8} rotationIntensity={1.2} floatIntensity={1.8}>
-        <Sphere position={[1.5, -0.5, 1]} args={[0.4]}>
-          <MeshDistortMaterial
-            color="#F59E0B"
-            distort={0.3}
-            speed={1.8}
-          />
-        </Sphere>
-      </Float>
+      <mesh position={[1.5, -0.5, 1]}>
+        <sphereGeometry args={[0.4]} />
+        <meshStandardMaterial
+          color="#F59E0B"
+        />
+      </mesh>
     </group>
   );
 }
@@ -69,7 +59,6 @@ export const Interactive3DCTA = () => {
           }}
           onCreated={({ gl }) => {
             gl.setClearColor('#000000', 0);
-            gl.physicallyCorrectLights = true;
           }}
           fallback={<div className="w-full h-full bg-gradient-to-br from-blue-900 to-purple-900" />}
         >

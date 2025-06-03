@@ -1,6 +1,5 @@
 
 import { Canvas } from '@react-three/fiber';
-import { Float, Sphere, MeshDistortMaterial } from '@react-three/drei';
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -17,37 +16,28 @@ function SimpleFloatingShapes() {
   
   return (
     <group ref={groupRef}>
-      <Float speed={1.5} rotationIntensity={1} floatIntensity={2}>
-        <Sphere position={[0, 0, 0]} args={[1]}>
-          <MeshDistortMaterial
-            color="#60A5FA"
-            distort={0.3}
-            speed={2}
-            transparent
-            opacity={0.6}
-          />
-        </Sphere>
-      </Float>
+      <mesh position={[0, 0, 0]}>
+        <sphereGeometry args={[1]} />
+        <meshStandardMaterial
+          color="#60A5FA"
+          transparent
+          opacity={0.6}
+        />
+      </mesh>
       
-      <Float speed={1.2} rotationIntensity={0.8} floatIntensity={1.5}>
-        <Sphere position={[-2, 1, -1]} args={[0.5]}>
-          <MeshDistortMaterial
-            color="#12D640"
-            distort={0.2}
-            speed={1.5}
-          />
-        </Sphere>
-      </Float>
+      <mesh position={[-2, 1, -1]}>
+        <sphereGeometry args={[0.5]} />
+        <meshStandardMaterial
+          color="#12D640"
+        />
+      </mesh>
       
-      <Float speed={1.8} rotationIntensity={1.2} floatIntensity={1.8}>
-        <Sphere position={[2, -0.5, 0]} args={[0.7]}>
-          <MeshDistortMaterial
-            color="#F59E0B"
-            distort={0.25}
-            speed={1.8}
-          />
-        </Sphere>
-      </Float>
+      <mesh position={[2, -0.5, 0]}>
+        <sphereGeometry args={[0.7]} />
+        <meshStandardMaterial
+          color="#F59E0B"
+        />
+      </mesh>
     </group>
   );
 }
@@ -64,7 +54,6 @@ export const Hero3D = () => {
         }}
         onCreated={({ gl }) => {
           gl.setClearColor('#000000', 0);
-          gl.physicallyCorrectLights = true;
         }}
         fallback={<div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100" />}
       >
