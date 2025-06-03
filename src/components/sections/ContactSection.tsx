@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, ExternalLink, Linkedin, Github, Code, BarChart3 } from "lucide-react";
+import { Mail, Phone, ExternalLink, Linkedin, Github } from "lucide-react";
 
 export const ContactSection = () => {
   return (
@@ -37,8 +37,8 @@ export const ContactSection = () => {
               links: [
                 { href: "https://www.linkedin.com/in/manojkumartechie/", icon: Linkedin },
                 { href: "https://github.com/manojkumartechie", icon: Github },
-                { href: "https://leetcode.com/manojkumartechie/", icon: Code },
-                { href: "https://www.kaggle.com/manojkumartechie", icon: BarChart3 }
+                { href: "https://leetcode.com/manojkumartechie/", iconUrl: "https://img.icons8.com/?size=100&id=wDGo581Ea5Nf&format=png&color=000000" },
+                { href: "https://www.kaggle.com/manojkumartechie", iconUrl: "https://img.icons8.com/?size=100&id=Omk4fWoSmCHm&format=png&color=000000" }
               ]
             }
           ].map((item, index) => (
@@ -71,7 +71,11 @@ export const ContactSection = () => {
                         >
                           <Button asChild variant="ghost" size="sm">
                             <a href={link.href} target="_blank">
-                              <link.icon className="h-5 w-5" />
+                              {link.iconUrl ? (
+                                <img src={link.iconUrl} alt="" className="h-5 w-5" />
+                              ) : (
+                                <link.icon className="h-5 w-5" />
+                              )}
                             </a>
                           </Button>
                         </motion.div>

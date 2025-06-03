@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Github, Linkedin, Mail, Code, BarChart3 } from "lucide-react";
+import { Menu, X, Github, Linkedin, Mail } from "lucide-react";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +13,14 @@ export const Navigation = () => {
     { href: "#skills", label: "Skills" },
     { href: "#projects", label: "Projects" },
     { href: "#contact", label: "Contact" }
+  ];
+
+  const socialLinks = [
+    { href: "https://github.com/manojkumartechie", icon: Github },
+    { href: "https://www.linkedin.com/in/manojkumartechie/", icon: Linkedin },
+    { href: "https://leetcode.com/manojkumartechie/", iconUrl: "https://img.icons8.com/?size=100&id=wDGo581Ea5Nf&format=png&color=000000" },
+    { href: "https://www.kaggle.com/manojkumartechie", iconUrl: "https://img.icons8.com/?size=100&id=Omk4fWoSmCHm&format=png&color=000000" },
+    { href: "mailto:manojkumar9384@outlook.com", icon: Mail }
   ];
 
   return (
@@ -57,13 +65,7 @@ export const Navigation = () => {
 
           {/* Right side buttons */}
           <div className="hidden md:flex items-center space-x-2">
-            {[
-              { href: "https://github.com/manojkumartechie", icon: Github },
-              { href: "https://www.linkedin.com/in/manojkumartechie/", icon: Linkedin },
-              { href: "https://leetcode.com/manojkumartechie/", icon: Code },
-              { href: "https://www.kaggle.com/manojkumartechie", icon: BarChart3 },
-              { href: "mailto:manojkumar9384@outlook.com", icon: Mail }
-            ].map((social, index) => (
+            {socialLinks.map((social, index) => (
               <motion.div
                 key={social.href}
                 whileHover={{ scale: 1.2, rotate: 10 }}
@@ -74,7 +76,11 @@ export const Navigation = () => {
               >
                 <Button asChild variant="ghost" size="sm" className="hover:bg-blue-100 dark:hover:bg-blue-900">
                   <a href={social.href} target="_blank">
-                    <social.icon className="h-4 w-4" />
+                    {social.iconUrl ? (
+                      <img src={social.iconUrl} alt="" className="h-4 w-4" />
+                    ) : (
+                      <social.icon className="h-4 w-4" />
+                    )}
                   </a>
                 </Button>
               </motion.div>
@@ -128,13 +134,7 @@ export const Navigation = () => {
                 </motion.a>
               ))}
               <div className="flex space-x-2 px-3 py-2">
-                {[
-                  { href: "https://github.com/manojkumartechie", icon: Github },
-                  { href: "https://www.linkedin.com/in/manojkumartechie/", icon: Linkedin },
-                  { href: "https://leetcode.com/manojkumartechie/", icon: Code },
-                  { href: "https://www.kaggle.com/manojkumartechie", icon: BarChart3 },
-                  { href: "mailto:manojkumar9384@outlook.com", icon: Mail }
-                ].map((social, index) => (
+                {socialLinks.map((social, index) => (
                   <motion.div
                     key={social.href}
                     whileHover={{ scale: 1.2 }}
@@ -145,7 +145,11 @@ export const Navigation = () => {
                   >
                     <Button asChild variant="ghost" size="sm">
                       <a href={social.href} target="_blank">
-                        <social.icon className="h-4 w-4" />
+                        {social.iconUrl ? (
+                          <img src={social.iconUrl} alt="" className="h-4 w-4" />
+                        ) : (
+                          <social.icon className="h-4 w-4" />
+                        )}
                       </a>
                     </Button>
                   </motion.div>
