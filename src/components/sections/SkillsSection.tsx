@@ -25,7 +25,7 @@ export const SkillsSection = () => {
   return (
     <motion.section 
       id="skills"
-      className="py-20 px-4 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-blue-900 transition-colors duration-500 relative overflow-hidden"
+      className="py-20 px-4 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900 transition-colors duration-500 relative overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -36,7 +36,7 @@ export const SkillsSection = () => {
         {[...Array(25)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-3 h-3 bg-gradient-to-r from-blue-300 to-purple-300 rounded-full opacity-10"
+            className="absolute w-3 h-3 bg-gradient-to-r from-cyan-300 to-blue-300 rounded-full opacity-20"
             animate={{
               x: [0, window.innerWidth],
               y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
@@ -54,7 +54,7 @@ export const SkillsSection = () => {
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.h2 
-          className="text-4xl font-bold text-center mb-16 text-gray-900 dark:text-white"
+          className="text-4xl font-bold text-center mb-16 text-white"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -79,19 +79,19 @@ export const SkillsSection = () => {
               whileHover={{ 
                 scale: 1.02,
                 y: -5,
-                boxShadow: "0 25px 50px rgba(0,0,0,0.15)"
+                boxShadow: "0 25px 50px rgba(6, 182, 212, 0.15)"
               }}
               className="perspective-1000"
             >
-              <Card className="border-0 shadow-2xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl relative overflow-hidden">
+              <Card className="border-0 shadow-2xl bg-gray-800/90 backdrop-blur-xl relative overflow-hidden">
                 {/* Animated background gradient */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-cyan-500/5"
+                  className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-blue-500/5 to-teal-500/5"
                   animate={{
                     background: [
-                      "linear-gradient(45deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05), rgba(6, 182, 212, 0.05))",
-                      "linear-gradient(90deg, rgba(139, 92, 246, 0.05), rgba(6, 182, 212, 0.05), rgba(59, 130, 246, 0.05))",
-                      "linear-gradient(135deg, rgba(6, 182, 212, 0.05), rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05))"
+                      "linear-gradient(45deg, rgba(6, 182, 212, 0.05), rgba(59, 130, 246, 0.05), rgba(20, 184, 166, 0.05))",
+                      "linear-gradient(90deg, rgba(59, 130, 246, 0.05), rgba(20, 184, 166, 0.05), rgba(6, 182, 212, 0.05))",
+                      "linear-gradient(135deg, rgba(20, 184, 166, 0.05), rgba(6, 182, 212, 0.05), rgba(59, 130, 246, 0.05))"
                     ]
                   }}
                   transition={{ duration: 8, repeat: Infinity }}
@@ -102,9 +102,9 @@ export const SkillsSection = () => {
                     whileHover={{ x: 10 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <CardTitle className="text-xl text-blue-900 dark:text-blue-400 flex items-center gap-3">
+                    <CardTitle className="text-xl text-cyan-400 flex items-center gap-3">
                       <motion.div
-                        className="w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+                        className="w-4 h-4 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
                         animate={{ 
                           scale: [1, 1.2, 1],
                           rotate: [0, 180, 360]
@@ -131,18 +131,18 @@ export const SkillsSection = () => {
                           scale: 1.15,
                           y: -8,
                           rotate: Math.random() * 10 - 5,
-                          boxShadow: "0 10px 25px rgba(0,0,0,0.2)"
+                          boxShadow: "0 10px 25px rgba(6, 182, 212, 0.2)"
                         }}
                         viewport={{ once: true }}
                         className="relative group"
                       >
                         <Badge 
                           variant="secondary" 
-                          className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-800 dark:text-blue-200 hover:from-blue-200 hover:to-purple-200 dark:hover:from-blue-800/40 dark:hover:to-purple-800/40 transition-all duration-300 border border-blue-200/50 dark:border-blue-700/50 relative overflow-hidden"
+                          className="bg-gradient-to-r from-gray-700 to-gray-800 text-cyan-300 hover:from-cyan-900/30 hover:to-blue-900/30 transition-all duration-300 border border-cyan-500/50 relative overflow-hidden"
                         >
                           {/* Shimmer effect */}
                           <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent"
                             animate={{ x: ['-100%', '100%'] }}
                             transition={{ 
                               duration: 2,

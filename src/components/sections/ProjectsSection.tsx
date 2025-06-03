@@ -44,7 +44,7 @@ export const ProjectsSection = () => {
   return (
     <motion.section 
       id="projects"
-      className="py-20 px-4 bg-white dark:bg-gray-900 transition-colors duration-500 relative overflow-hidden"
+      className="py-20 px-4 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-900 transition-colors duration-500 relative overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -55,7 +55,7 @@ export const ProjectsSection = () => {
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-30"
+            className="absolute w-1 h-1 bg-cyan-400 rounded-full opacity-30"
             animate={{
               x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
               y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
@@ -72,7 +72,7 @@ export const ProjectsSection = () => {
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.h2 
-          className="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white"
+          className="text-4xl font-bold text-center mb-4 text-white"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -82,7 +82,7 @@ export const ProjectsSection = () => {
         </motion.h2>
         
         <motion.p 
-          className="text-center text-gray-600 dark:text-gray-400 mb-16"
+          className="text-center text-gray-400 mb-16"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
