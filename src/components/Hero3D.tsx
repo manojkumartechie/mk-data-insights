@@ -3,9 +3,10 @@ import { Canvas } from '@react-three/fiber';
 import { Float, Sphere, MeshDistortMaterial } from '@react-three/drei';
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
 
 function SimpleFloatingShapes() {
-  const groupRef = useRef<any>(null);
+  const groupRef = useRef<THREE.Group>(null);
   
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
@@ -57,13 +58,15 @@ export const Hero3D = () => {
       <Canvas 
         camera={{ position: [0, 0, 5], fov: 75 }}
         gl={{ 
-          antialias: false, 
+          antialias: true, 
           alpha: true,
-          powerPreference: "default"
+          powerPreference: "high-performance"
         }}
         onCreated={({ gl }) => {
           gl.setClearColor('#000000', 0);
+          gl.physicallyCorrectLights = true;
         }}
+        fallback={<div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100" />}
       >
         <ambientLight intensity={0.4} />
         <pointLight position={[5, 5, 5]} intensity={0.6} color="#60A5FA" />

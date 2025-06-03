@@ -6,9 +6,10 @@ import { useFrame } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Zap, Sparkles, Rocket } from 'lucide-react';
+import * as THREE from 'three';
 
 function SimpleCTAElements() {
-  const groupRef = useRef<any>(null);
+  const groupRef = useRef<THREE.Group>(null);
   
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
@@ -57,18 +58,20 @@ function SimpleCTAElements() {
 export const Interactive3DCTA = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
-      {/* Simplified 3D Background */}
+      {/* 3D Background */}
       <div className="absolute inset-0 z-0">
         <Canvas 
           camera={{ position: [0, 0, 6] }}
           gl={{ 
-            antialias: false, 
+            antialias: true, 
             alpha: true,
-            powerPreference: "default"
+            powerPreference: "high-performance"
           }}
           onCreated={({ gl }) => {
             gl.setClearColor('#000000', 0);
+            gl.physicallyCorrectLights = true;
           }}
+          fallback={<div className="w-full h-full bg-gradient-to-br from-blue-900 to-purple-900" />}
         >
           <ambientLight intensity={0.4} />
           <pointLight position={[5, 5, 5]} intensity={0.8} color="#60A5FA" />
