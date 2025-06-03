@@ -319,20 +319,6 @@ export const HeroSection = () => {
               </motion.div>
             ))}
           </motion.div>
-
-          {/* Enhanced Floating Action Text with better mobile sizing */}
-          <motion.div
-            animate={{ 
-              y: [0, -20, 0],
-              opacity: [0.7, 1, 0.7]
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="pt-6 sm:pt-8"
-          >
-            <p className="text-base sm:text-lg font-semibold text-gray-600 dark:text-gray-300">
-              ⬇️ Scroll down to discover my journey ⬇️
-            </p>
-          </motion.div>
         </motion.div>
       </div>
     </section>
