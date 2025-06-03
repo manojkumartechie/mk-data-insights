@@ -8,7 +8,7 @@ export const ContactSection = () => {
   return (
     <motion.section 
       id="contact"
-      className="py-20 px-4 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900 transition-colors duration-500"
+      className="py-20 px-4 bg-gray-50 dark:bg-gray-800 transition-colors duration-500"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -16,7 +16,7 @@ export const ContactSection = () => {
     >
       <div className="max-w-4xl mx-auto">
         <motion.h2 
-          className="text-4xl font-bold text-center mb-16 text-white"
+          className="text-4xl font-bold text-center mb-16 text-gray-900 dark:text-white"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -27,13 +27,13 @@ export const ContactSection = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
-            { icon: Mail, title: "Email", content: "manojkumar9384@outlook.com", color: "text-cyan-400" },
-            { icon: Phone, title: "Contact", content: "+91 7826807488", color: "text-blue-400" },
+            { icon: Mail, title: "Email", content: "manojkumar9384@outlook.com", color: "text-blue-400" },
+            { icon: Phone, title: "Contact", content: "+91 7826807488", color: "text-green-400" },
             { 
               icon: ExternalLink, 
               title: "Social Profiles", 
               content: "LinkedIn • GitHub • LeetCode • Kaggle", 
-              color: "text-teal-400",
+              color: "text-purple-400",
               links: [
                 { href: "https://www.linkedin.com/in/manojkumartechie/", icon: Linkedin },
                 { href: "https://github.com/manojkumartechie", icon: Github },
@@ -50,7 +50,7 @@ export const ContactSection = () => {
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
             >
-              <Card className="bg-gray-800 border border-cyan-500/30 shadow-lg">
+              <Card className="bg-white dark:bg-gray-900 border shadow-lg">
                 <CardHeader className="text-center">
                   <motion.div
                     whileHover={{ rotate: 360 }}
@@ -58,7 +58,7 @@ export const ContactSection = () => {
                   >
                     <item.icon className={`h-8 w-8 mx-auto mb-2 ${item.color}`} />
                   </motion.div>
-                  <CardTitle className="text-white">{item.title}</CardTitle>
+                  <CardTitle className="text-gray-900 dark:text-white">{item.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
                   {item.links ? (
@@ -69,7 +69,7 @@ export const ContactSection = () => {
                           whileHover={{ scale: 1.2 }}
                           whileTap={{ scale: 0.9 }}
                         >
-                          <Button asChild variant="ghost" size="sm" className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-900/30">
+                          <Button asChild variant="ghost" size="sm">
                             <a href={link.href} target="_blank">
                               <link.icon className="h-5 w-5" />
                             </a>
@@ -78,7 +78,7 @@ export const ContactSection = () => {
                       ))}
                     </div>
                   ) : (
-                    <p className="text-gray-300">{item.content}</p>
+                    <p className="text-gray-600 dark:text-gray-300">{item.content}</p>
                   )}
                 </CardContent>
               </Card>
