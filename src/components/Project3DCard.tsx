@@ -45,8 +45,8 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
         stiffness: 100
       }}
       whileHover={{ 
-        y: -20,
-        scale: 1.05,
+        y: -10,
+        scale: 1.02,
         transition: { duration: 0.4, type: "spring", damping: 10 }
       }}
       onMouseMove={handleMouseMove}
@@ -56,14 +56,14 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
     >
       <motion.div
         style={{
-          rotateX: isHovered ? mousePosition.y * 15 : 0,
-          rotateY: isHovered ? mousePosition.x * 15 : 0,
+          rotateX: isHovered ? mousePosition.y * 8 : 0,
+          rotateY: isHovered ? mousePosition.x * 8 : 0,
           transformStyle: "preserve-3d",
         }}
         transition={{ type: "spring", damping: 20, stiffness: 100 }}
         className="relative h-full"
       >
-        <Card className="overflow-hidden border-0 glass-card shadow-2xl transform-gpu relative h-full flex flex-col min-h-[600px]">
+        <Card className="overflow-hidden border-0 glass-card shadow-2xl transform-gpu relative h-full flex flex-col mobile-project-card min-h-[580px] sm:min-h-[620px] lg:min-h-[650px]">
           {/* Animated border glow */}
           <motion.div
             className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -83,7 +83,7 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
           {/* Floating particles */}
           {isHovered && (
             <div className="absolute inset-0 pointer-events-none">
-              {[...Array(8)].map((_, i) => (
+              {[...Array(6)].map((_, i) => (
                 <motion.div
                   key={i}
                   className="absolute w-1 h-1 bg-primary rounded-full"
@@ -108,17 +108,17 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
           )}
 
           <motion.div 
-            className="relative h-56 overflow-hidden group flex-shrink-0"
+            className="relative h-48 sm:h-52 lg:h-56 overflow-hidden group flex-shrink-0"
             style={{ transform: "translateZ(30px)" }}
           >
             <motion.img 
               src={image} 
               alt={title}
               className="w-full h-full object-cover transition-all duration-700"
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.05 }}
               animate={isHovered ? { 
                 filter: "brightness(1.1) contrast(1.1)",
-                scale: 1.05
+                scale: 1.03
               } : {
                 filter: "brightness(1) contrast(1)",
                 scale: 1
@@ -135,7 +135,7 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
 
             {/* Floating preview button */}
             <motion.div
-              className="absolute top-4 right-4"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ 
                 opacity: isHovered ? 1 : 0,
@@ -144,41 +144,42 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
               }}
               transition={{ duration: 0.4, type: "spring" }}
             >
-              <Button size="sm" className="glass-effect border border-primary/30 hover:bg-primary/20">
-                <Eye className="h-4 w-4" />
+              <Button size="sm" className="glass-effect border border-primary/30 hover:bg-primary/20 touch-target">
+                <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </motion.div>
           </motion.div>
 
-          <div className="flex flex-col flex-grow">
-            <CardHeader style={{ transform: "translateZ(20px)" }} className="flex-shrink-0">
+          <div className="flex flex-col flex-grow p-4 sm:p-6">
+            <CardHeader style={{ transform: "translateZ(20px)" }} className="flex-shrink-0 p-0 mb-3 sm:mb-4">
               <motion.div
-                animate={isHovered ? { y: -5 } : { y: 0 }}
+                animate={isHovered ? { y: -3 } : { y: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <CardTitle className="text-xl text-foreground flex items-center gap-2">
+                <CardTitle className="text-lg sm:text-xl text-foreground flex items-center gap-2">
                   <motion.span
-                    animate={isHovered ? { x: 5 } : { x: 0 }}
+                    animate={isHovered ? { x: 3 } : { x: 0 }}
                     transition={{ duration: 0.3 }}
+                    className="line-clamp-2"
                   >
                     {title}
                   </motion.span>
                   <motion.div
                     animate={isHovered ? { rotate: 360, scale: 1.2 } : { rotate: 0, scale: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="w-2 h-2 bg-accent rounded-full"
+                    className="w-2 h-2 bg-accent rounded-full flex-shrink-0"
                   />
                 </CardTitle>
-                <CardDescription className="text-muted-foreground">
+                <CardDescription className="text-muted-foreground mobile-text mt-2 line-clamp-3">
                   {description}
                 </CardDescription>
               </motion.div>
             </CardHeader>
 
-            <CardContent style={{ transform: "translateZ(15px)" }} className="flex flex-col flex-grow">
+            <CardContent style={{ transform: "translateZ(15px)" }} className="flex flex-col flex-grow p-0">
               <motion.div 
-                className="flex flex-wrap gap-2 mb-6 flex-grow"
-                animate={isHovered ? { scale: 1.02 } : { scale: 1 }}
+                className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6 flex-grow"
+                animate={isHovered ? { scale: 1.01 } : { scale: 1 }}
                 transition={{ duration: 0.3 }}
               >
                 {technologies.map((tech, techIndex) => (
@@ -186,16 +187,16 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
                     key={techIndex}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: techIndex * 0.1 + 0.2 }}
+                    transition={{ delay: techIndex * 0.05 + 0.2 }}
                     whileHover={{ 
-                      scale: 1.15,
-                      y: -3,
+                      scale: 1.1,
+                      y: -2,
                       boxShadow: "0 4px 20px rgba(0,0,0,0.2)"
                     }}
                   >
                     <Badge 
                       variant="outline" 
-                      className="text-xs glass-effect border-primary/20 text-foreground hover:border-accent/50 hover:bg-accent/10 transition-all duration-300"
+                      className="text-xs glass-effect border-primary/20 text-foreground hover:border-accent/50 hover:bg-accent/10 transition-all duration-300 touch-target"
                     >
                       {tech}
                     </Badge>
@@ -204,22 +205,22 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
               </motion.div>
 
               <motion.div
-                className="flex gap-3 mt-auto"
-                animate={isHovered ? { y: -3 } : { y: 0 }}
+                className="flex gap-2 sm:gap-3 mt-auto"
+                animate={isHovered ? { y: -2 } : { y: 0 }}
                 transition={{ duration: 0.3 }}
               >
                 <motion.div
-                  whileHover={{ scale: 1.1, rotateY: 10 }}
+                  whileHover={{ scale: 1.05, rotateY: 5 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex-1"
                 >
-                  <Button asChild className="w-full glossy-button text-primary-foreground shadow-lg">
-                    <a href={github} target="_blank" className="flex items-center justify-center">
+                  <Button asChild className="w-full glossy-button text-primary-foreground shadow-lg touch-target text-sm">
+                    <a href={github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
                       <motion.div
                         animate={{ rotate: [0, 360] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                       >
-                        <Github className="mr-2 h-4 w-4" />
+                        <Github className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                       </motion.div>
                       GitHub
                     </a>
@@ -227,11 +228,11 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
                 </motion.div>
 
                 <motion.div
-                  whileHover={{ scale: 1.1, rotateY: -10 }}
+                  whileHover={{ scale: 1.05, rotateY: -5 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button variant="outline" size="default" className="glass-effect border-primary text-primary hover:bg-primary/20 shadow-lg">
-                    <ExternalLink className="h-4 w-4" />
+                  <Button variant="outline" size="default" className="glass-effect border-primary text-primary hover:bg-primary/20 shadow-lg touch-target">
+                    <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4" />
                   </Button>
                 </motion.div>
               </motion.div>

@@ -44,7 +44,7 @@ export const ProjectsSection = () => {
   return (
     <motion.section 
       id="projects"
-      className="py-20 px-4 bg-background/80 transition-colors duration-500 relative overflow-hidden"
+      className="py-12 sm:py-16 lg:py-20 mobile-padding bg-background/80 transition-colors duration-500 relative overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -72,7 +72,7 @@ export const ProjectsSection = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.h2 
-          className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+          className="mobile-heading font-bold text-center mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -82,7 +82,7 @@ export const ProjectsSection = () => {
         </motion.h2>
         
         <motion.p 
-          className="text-center text-muted-foreground mb-16"
+          className="text-center text-muted-foreground mb-8 sm:mb-12 lg:mb-16 mobile-text"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -91,14 +91,26 @@ export const ProjectsSection = () => {
           Self-Initiated Projects (2025 – Present)
         </motion.p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 justify-items-center">
           {projects.map((project, index) => (
-            <div key={index} className="w-full max-w-md">
+            <motion.div 
+              key={index} 
+              className="w-full max-w-md h-full"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: index * 0.1,
+                type: "spring",
+                damping: 15 
+              }}
+              viewport={{ once: true }}
+            >
               <Project3DCard
                 {...project}
                 index={index}
               />
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
