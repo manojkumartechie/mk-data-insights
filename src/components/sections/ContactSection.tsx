@@ -95,14 +95,14 @@ export const ContactSection = () => {
                             asChild 
                             variant="ghost" 
                             size="sm" 
-                            className="glossy-icon touch-target text-muted-foreground hover:text-accent animate-pulse-glow"
+                            className="glossy-icon touch-target text-muted-foreground hover:text-accent animate-pulse-glow group"
                           >
                             <a href={link.href} target="_blank" rel="noopener noreferrer">
                               {link.iconUrl ? (
                                 <img 
                                   src={link.iconUrl} 
                                   alt={link.name || ""} 
-                                  className="h-5 w-5 sm:h-6 sm:w-6" 
+                                  className="h-5 w-5 sm:h-6 sm:w-6 filter brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-300" 
                                 />
                               ) : (
                                 <link.icon className="h-5 w-5 sm:h-6 sm:w-6" />

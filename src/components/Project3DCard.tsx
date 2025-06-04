@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink, Eye } from "lucide-react";
+import { Github, Youtube } from "lucide-react";
 import { useState } from 'react';
 
 interface Project3DCardProps {
@@ -132,22 +132,6 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
               animate={{ opacity: isHovered ? 1 : 0.3 }}
               transition={{ duration: 0.3 }}
             />
-
-            {/* Floating preview button */}
-            <motion.div
-              className="absolute top-3 right-3 sm:top-4 sm:right-4"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ 
-                opacity: isHovered ? 1 : 0,
-                scale: isHovered ? 1 : 0,
-                rotate: isHovered ? 360 : 0
-              }}
-              transition={{ duration: 0.4, type: "spring" }}
-            >
-              <Button size="sm" className="glass-effect border border-primary/30 hover:bg-primary/20 touch-target">
-                <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
-              </Button>
-            </motion.div>
           </motion.div>
 
           <div className="flex flex-col flex-grow p-4 sm:p-6">
@@ -232,7 +216,7 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
                   whileTap={{ scale: 0.95 }}
                 >
                   <Button variant="outline" size="default" className="glass-effect border-primary text-primary hover:bg-primary/20 shadow-lg touch-target">
-                    <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <Youtube className="h-3 w-3 sm:h-4 sm:w-4" />
                   </Button>
                 </motion.div>
               </motion.div>

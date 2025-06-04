@@ -94,7 +94,7 @@ export const Navigation = () => {
                       <img 
                         src={social.iconUrl} 
                         alt={social.name || ""} 
-                        className="h-4 w-4 lg:h-5 lg:w-5 relative z-10 transition-all duration-300"
+                        className="h-4 w-4 lg:h-5 lg:w-5 relative z-10 transition-all duration-300 filter brightness-0 invert group-hover:brightness-100 group-hover:invert-0"
                       />
                     ) : (
                       <social.icon className="h-4 w-4 lg:h-5 lg:w-5 text-accent group-hover:text-primary transition-colors duration-300" />
@@ -173,7 +173,7 @@ export const Navigation = () => {
                           <img 
                             src={social.iconUrl} 
                             alt={social.name || ""} 
-                            className="h-5 w-5 transition-all duration-300"
+                            className="h-5 w-5 transition-all duration-300 filter brightness-0 invert group-hover:brightness-100 group-hover:invert-0"
                           />
                         ) : (
                           <social.icon className="h-5 w-5 text-accent group-hover:text-primary transition-colors duration-300" />
