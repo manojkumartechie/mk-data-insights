@@ -25,7 +25,7 @@ export const Navigation = () => {
 
   return (
     <motion.nav 
-      className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-primary/20 shadow-lg"
+      className="fixed top-0 left-0 right-0 z-50 glass-card shadow-2xl border-b border-white/10"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
@@ -35,10 +35,10 @@ export const Navigation = () => {
           {/* Logo */}
           <motion.div 
             className="flex-shrink-0"
-            whileHover={{ scale: 1.1, rotate: 2 }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-accent bg-clip-text text-transparent">
+            <span className="text-xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-shimmer">
               Manoj Kumar K
             </span>
           </motion.div>
@@ -50,14 +50,15 @@ export const Navigation = () => {
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  className="text-muted-foreground hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition-all duration-300"
-                  whileHover={{ scale: 1.1, y: -2 }}
+                  className="text-muted-foreground hover:text-accent px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 glass-effect hover:scale-105 hover:shadow-lg relative overflow-hidden group"
+                  whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  {item.label}
+                  <span className="relative z-10">{item.label}</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </motion.a>
               ))}
             </div>
@@ -68,16 +69,16 @@ export const Navigation = () => {
             {socialLinks.map((social, index) => (
               <motion.div
                 key={social.href}
-                whileHover={{ scale: 1.2, rotate: 10 }}
+                whileHover={{ scale: 1.2, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 + index * 0.1, type: "spring" }}
               >
-                <Button asChild variant="ghost" size="sm" className="hover:bg-primary/10 text-muted-foreground hover:text-accent">
+                <Button asChild variant="ghost" size="sm" className="glass-effect hover:shadow-lg hover:animate-glow">
                   <a href={social.href} target="_blank">
                     {social.iconUrl ? (
-                      <img src={social.iconUrl} alt="" className="h-4 w-4" />
+                      <img src={social.iconUrl} alt="" className="h-4 w-4 brightness-0 invert" />
                     ) : (
                       <social.icon className="h-4 w-4" />
                     )}
@@ -97,7 +98,7 @@ export const Navigation = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-muted-foreground hover:text-accent"
+                className="glass-effect"
               >
                 <motion.div
                   animate={{ rotate: isOpen ? 180 : 0 }}
@@ -119,17 +120,17 @@ export const Navigation = () => {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-secondary/50 backdrop-blur-md rounded-b-xl">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 glass-card rounded-b-xl mt-2">
               {navItems.map((item, index) => (
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  className="text-muted-foreground hover:text-accent block px-3 py-2 rounded-md text-base font-medium"
+                  className="text-muted-foreground hover:text-accent block px-3 py-2 rounded-lg text-base font-medium glass-effect transition-all duration-300"
                   onClick={() => setIsOpen(false)}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ x: 10 }}
+                  whileHover={{ x: 10, scale: 1.02 }}
                 >
                   {item.label}
                 </motion.a>
@@ -144,10 +145,10 @@ export const Navigation = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.3 + index * 0.1 }}
                   >
-                    <Button asChild variant="ghost" size="sm" className="text-muted-foreground hover:text-accent">
+                    <Button asChild variant="ghost" size="sm" className="glass-effect">
                       <a href={social.href} target="_blank">
                         {social.iconUrl ? (
-                          <img src={social.iconUrl} alt="" className="h-4 w-4" />
+                          <img src={social.iconUrl} alt="" className="h-4 w-4 brightness-0 invert" />
                         ) : (
                           <social.icon className="h-4 w-4" />
                         )}
