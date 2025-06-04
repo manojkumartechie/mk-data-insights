@@ -44,7 +44,7 @@ export const ProjectsSection = () => {
   return (
     <motion.section 
       id="projects"
-      className="py-20 px-4 bg-white dark:bg-gray-900 transition-colors duration-500 relative overflow-hidden"
+      className="py-20 px-4 bg-background/80 transition-colors duration-500 relative overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -55,10 +55,10 @@ export const ProjectsSection = () => {
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-30"
+            className="absolute w-1 h-1 bg-primary/30 rounded-full"
             animate={{
-              x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
-              y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
+              x: [Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200), Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200)],
+              y: [Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800), Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800)],
               scale: [0, 2, 0],
             }}
             transition={{
@@ -70,9 +70,9 @@ export const ProjectsSection = () => {
         ))}
       </div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.h2 
-          className="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white"
+          className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -82,7 +82,7 @@ export const ProjectsSection = () => {
         </motion.h2>
         
         <motion.p 
-          className="text-center text-gray-600 dark:text-gray-400 mb-16"
+          className="text-center text-muted-foreground mb-16"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -91,13 +91,14 @@ export const ProjectsSection = () => {
           Self-Initiated Projects (2025 – Present)
         </motion.p>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center">
           {projects.map((project, index) => (
-            <Project3DCard
-              key={index}
-              {...project}
-              index={index}
-            />
+            <div key={index} className="w-full max-w-md">
+              <Project3DCard
+                {...project}
+                index={index}
+              />
+            </div>
           ))}
         </div>
       </div>

@@ -52,7 +52,7 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="perspective-1000 relative group"
+      className="perspective-1000 relative group w-full h-full"
     >
       <motion.div
         style={{
@@ -61,23 +61,23 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
           transformStyle: "preserve-3d",
         }}
         transition={{ type: "spring", damping: 20, stiffness: 100 }}
-        className="relative"
+        className="relative h-full"
       >
-        <Card className="overflow-hidden border-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-2xl transform-gpu relative">
+        <Card className="overflow-hidden border-0 glass-card shadow-2xl transform-gpu relative h-full flex flex-col min-h-[600px]">
           {/* Animated border glow */}
           <motion.div
-            className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             style={{ padding: '2px' }}
             animate={isHovered ? {
               background: [
-                "linear-gradient(45deg, #3B82F6, #8B5CF6, #06B6D4, #3B82F6)",
-                "linear-gradient(90deg, #8B5CF6, #06B6D4, #3B82F6, #8B5CF6)",
-                "linear-gradient(135deg, #06B6D4, #3B82F6, #8B5CF6, #06B6D4)"
+                "linear-gradient(45deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)))",
+                "linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary)), hsl(var(--accent)))",
+                "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)))"
               ]
             } : {}}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            <div className="w-full h-full bg-white dark:bg-gray-900 rounded-xl" />
+            <div className="w-full h-full bg-background rounded-xl" />
           </motion.div>
 
           {/* Floating particles */}
@@ -86,7 +86,7 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
               {[...Array(8)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-1 h-1 bg-blue-400 rounded-full"
+                  className="absolute w-1 h-1 bg-primary rounded-full"
                   initial={{ 
                     x: Math.random() * 100 + '%',
                     y: '100%',
@@ -108,7 +108,7 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
           )}
 
           <motion.div 
-            className="relative h-64 overflow-hidden group"
+            className="relative h-56 overflow-hidden group flex-shrink-0"
             style={{ transform: "translateZ(30px)" }}
           >
             <motion.img 
@@ -127,7 +127,7 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
             
             {/* 3D overlay effect */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
+              className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent"
               initial={{ opacity: 0 }}
               animate={{ opacity: isHovered ? 1 : 0.3 }}
               transition={{ duration: 0.3 }}
@@ -144,97 +144,99 @@ export const Project3DCard: React.FC<Project3DCardProps> = ({
               }}
               transition={{ duration: 0.4, type: "spring" }}
             >
-              <Button size="sm" className="bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white/30">
+              <Button size="sm" className="glass-effect border border-primary/30 hover:bg-primary/20">
                 <Eye className="h-4 w-4" />
               </Button>
             </motion.div>
           </motion.div>
 
-          <CardHeader style={{ transform: "translateZ(20px)" }}>
-            <motion.div
-              animate={isHovered ? { y: -5 } : { y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <CardTitle className="text-xl text-gray-900 dark:text-white flex items-center gap-2">
-                <motion.span
-                  animate={isHovered ? { x: 5 } : { x: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {title}
-                </motion.span>
-                <motion.div
-                  animate={isHovered ? { rotate: 360, scale: 1.2 } : { rotate: 0, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="w-2 h-2 bg-green-400 rounded-full"
-                />
-              </CardTitle>
-              <CardDescription className="text-gray-600 dark:text-gray-300">
-                {description}
-              </CardDescription>
-            </motion.div>
-          </CardHeader>
-
-          <CardContent style={{ transform: "translateZ(15px)" }}>
-            <motion.div 
-              className="flex flex-wrap gap-2 mb-6"
-              animate={isHovered ? { scale: 1.02 } : { scale: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              {technologies.map((tech, techIndex) => (
-                <motion.div
-                  key={techIndex}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: techIndex * 0.1 + 0.2 }}
-                  whileHover={{ 
-                    scale: 1.15,
-                    y: -3,
-                    boxShadow: "0 4px 20px rgba(0,0,0,0.2)"
-                  }}
-                >
-                  <Badge 
-                    variant="outline" 
-                    className="text-xs bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-blue-200 dark:border-blue-700 hover:shadow-lg transition-all duration-300"
+          <div className="flex flex-col flex-grow">
+            <CardHeader style={{ transform: "translateZ(20px)" }} className="flex-shrink-0">
+              <motion.div
+                animate={isHovered ? { y: -5 } : { y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <CardTitle className="text-xl text-foreground flex items-center gap-2">
+                  <motion.span
+                    animate={isHovered ? { x: 5 } : { x: 0 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    {tech}
-                  </Badge>
-                </motion.div>
-              ))}
-            </motion.div>
+                    {title}
+                  </motion.span>
+                  <motion.div
+                    animate={isHovered ? { rotate: 360, scale: 1.2 } : { rotate: 0, scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-2 h-2 bg-accent rounded-full"
+                  />
+                </CardTitle>
+                <CardDescription className="text-muted-foreground">
+                  {description}
+                </CardDescription>
+              </motion.div>
+            </CardHeader>
 
-            <motion.div
-              className="flex gap-3"
-              animate={isHovered ? { y: -3 } : { y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <motion.div
-                whileHover={{ scale: 1.1, rotateY: 10 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex-1"
+            <CardContent style={{ transform: "translateZ(15px)" }} className="flex flex-col flex-grow">
+              <motion.div 
+                className="flex flex-wrap gap-2 mb-6 flex-grow"
+                animate={isHovered ? { scale: 1.02 } : { scale: 1 }}
+                transition={{ duration: 0.3 }}
               >
-                <Button asChild className="w-full bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black text-white shadow-lg">
-                  <a href={github} target="_blank" className="flex items-center justify-center">
-                    <motion.div
-                      animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                {technologies.map((tech, techIndex) => (
+                  <motion.div
+                    key={techIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: techIndex * 0.1 + 0.2 }}
+                    whileHover={{ 
+                      scale: 1.15,
+                      y: -3,
+                      boxShadow: "0 4px 20px rgba(0,0,0,0.2)"
+                    }}
+                  >
+                    <Badge 
+                      variant="outline" 
+                      className="text-xs glass-effect border-primary/20 text-foreground hover:border-accent/50 hover:bg-accent/10 transition-all duration-300"
                     >
-                      <Github className="mr-2 h-4 w-4" />
-                    </motion.div>
-                    GitHub
-                  </a>
-                </Button>
+                      {tech}
+                    </Badge>
+                  </motion.div>
+                ))}
               </motion.div>
 
               <motion.div
-                whileHover={{ scale: 1.1, rotateY: -10 }}
-                whileTap={{ scale: 0.95 }}
+                className="flex gap-3 mt-auto"
+                animate={isHovered ? { y: -3 } : { y: 0 }}
+                transition={{ duration: 0.3 }}
               >
-                <Button variant="outline" size="default" className="border-2 border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white shadow-lg">
-                  <ExternalLink className="h-4 w-4" />
-                </Button>
+                <motion.div
+                  whileHover={{ scale: 1.1, rotateY: 10 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex-1"
+                >
+                  <Button asChild className="w-full glossy-button text-primary-foreground shadow-lg">
+                    <a href={github} target="_blank" className="flex items-center justify-center">
+                      <motion.div
+                        animate={{ rotate: [0, 360] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                      >
+                        <Github className="mr-2 h-4 w-4" />
+                      </motion.div>
+                      GitHub
+                    </a>
+                  </Button>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.1, rotateY: -10 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button variant="outline" size="default" className="glass-effect border-primary text-primary hover:bg-primary/20 shadow-lg">
+                    <ExternalLink className="h-4 w-4" />
+                  </Button>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          </CardContent>
+            </CardContent>
+          </div>
         </Card>
       </motion.div>
     </motion.div>

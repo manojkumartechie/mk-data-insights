@@ -18,8 +18,16 @@ export const Navigation = () => {
   const socialLinks = [
     { href: "https://github.com/manojkumartechie", icon: Github },
     { href: "https://www.linkedin.com/in/manojkumartechie/", icon: Linkedin },
-    { href: "https://leetcode.com/manojkumartechie/", iconUrl: "https://img.icons8.com/?size=100&id=wDGo581Ea5Nf&format=png&color=000000" },
-    { href: "https://www.kaggle.com/manojkumartechie", iconUrl: "https://img.icons8.com/?size=100&id=Omk4fWoSmCHm&format=png&color=000000" },
+    { 
+      href: "https://leetcode.com/manojkumartechie/", 
+      iconUrl: "https://img.icons8.com/?size=100&id=wDGo581Ea5Nf&format=png&color=000000",
+      name: "LeetCode"
+    },
+    { 
+      href: "https://www.kaggle.com/manojkumartechie", 
+      iconUrl: "https://img.icons8.com/?size=100&id=Omk4fWoSmCHm&format=png&color=000000",
+      name: "Kaggle"
+    },
     { href: "mailto:manojkumar9384@outlook.com", icon: Mail }
   ];
 
@@ -75,12 +83,22 @@ export const Navigation = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 + index * 0.1, type: "spring" }}
               >
-                <Button asChild variant="ghost" size="sm" className="glass-effect hover:shadow-lg hover:animate-glow">
+                <Button asChild variant="ghost" size="sm" className="glass-effect hover:shadow-lg hover:animate-glow relative overflow-hidden group">
                   <a href={social.href} target="_blank">
                     {social.iconUrl ? (
-                      <img src={social.iconUrl} alt="" className="h-4 w-4 brightness-0 invert" />
+                      <div className="relative">
+                        <img 
+                          src={social.iconUrl} 
+                          alt={social.name || ""} 
+                          className="h-4 w-4 relative z-10 filter brightness-0 invert group-hover:filter-none transition-all duration-300"
+                          style={{
+                            filter: 'brightness(0) saturate(100%) invert(85%) sepia(95%) saturate(1679%) hue-rotate(4deg) brightness(109%) contrast(97%)'
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-sm" />
+                      </div>
                     ) : (
-                      <social.icon className="h-4 w-4" />
+                      <social.icon className="h-4 w-4 text-accent group-hover:text-primary transition-colors duration-300" />
                     )}
                   </a>
                 </Button>
@@ -145,12 +163,19 @@ export const Navigation = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.3 + index * 0.1 }}
                   >
-                    <Button asChild variant="ghost" size="sm" className="glass-effect">
+                    <Button asChild variant="ghost" size="sm" className="glass-effect group">
                       <a href={social.href} target="_blank">
                         {social.iconUrl ? (
-                          <img src={social.iconUrl} alt="" className="h-4 w-4 brightness-0 invert" />
+                          <img 
+                            src={social.iconUrl} 
+                            alt={social.name || ""} 
+                            className="h-4 w-4"
+                            style={{
+                              filter: 'brightness(0) saturate(100%) invert(85%) sepia(95%) saturate(1679%) hue-rotate(4deg) brightness(109%) contrast(97%)'
+                            }}
+                          />
                         ) : (
-                          <social.icon className="h-4 w-4" />
+                          <social.icon className="h-4 w-4 text-accent" />
                         )}
                       </a>
                     </Button>
