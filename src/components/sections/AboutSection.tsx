@@ -1,178 +1,164 @@
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Calendar, Phone, MapPin, Mail, User, Award } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { MapPin, Phone, Mail, Calendar, Target, TrendingUp, Award, Users } from "lucide-react";
 
 export const AboutSection = () => {
+  const contactInfo = [
+    { icon: Phone, text: "+91 7826807488", href: "tel:+917826807488" },
+    { icon: Mail, text: "manojkumar9384@outlook.com", href: "mailto:manojkumar9384@outlook.com" },
+    { icon: MapPin, text: "Dindigul, Tamil Nadu, India" },
+  ];
+
+  const coreStrengths = [
+    { icon: TrendingUp, title: "Data Analytics", description: "Advanced statistical analysis and predictive modeling" },
+    { icon: Target, title: "Machine Learning", description: "Deep learning, time series forecasting, and risk assessment" },
+    { icon: Award, title: "Financial Analytics", description: "Portfolio optimization, fraud detection, and risk management" },
+    { icon: Users, title: "Problem Solving", description: "Complex data challenges with innovative solutions" },
+  ];
+
   return (
     <motion.section 
       id="about"
-      className="py-20 px-4 premium-gradient relative overflow-hidden"
+      className="py-12 sm:py-16 lg:py-20 mobile-padding bg-muted/30 transition-colors duration-500"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.8 }}
       viewport={{ once: true }}
     >
-      {/* Animated background elements */}
-      <div className="absolute inset-0">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-4 h-4 bg-primary/20 rounded-full blur-sm"
-            initial={{ 
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-            }}
-            animate={{
-              x: [null, Math.random() * window.innerWidth],
-              y: [null, Math.random() * window.innerHeight],
-              scale: [1, 1.5, 1],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: Math.random() * 20 + 15,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto">
         <motion.h2 
-          className="text-5xl font-bold text-center mb-16 text-foreground bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent"
-          initial={{ opacity: 0, y: 50, scale: 0.5 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+          className="mobile-heading font-bold text-center mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          whileHover={{ scale: 1.05 }}
         >
           About Me
-          <motion.div
-            className="h-2 bg-gradient-to-r from-primary to-accent rounded-full mt-4 mx-auto glass-effect"
-            initial={{ width: 0 }}
-            whileInView={{ width: "120px" }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            viewport={{ once: true }}
-          />
         </motion.h2>
         
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <motion.p 
+          className="text-center text-muted-foreground mb-8 sm:mb-12 mobile-text max-w-3xl mx-auto"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          Passionate Data Analyst with expertise in machine learning, financial analytics, and big data technologies
+        </motion.p>
+
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* Professional Summary */}
           <motion.div
-            initial={{ opacity: 0, x: -100 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, type: "spring" }}
+            transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
-            className="space-y-6"
           >
-            <motion.div 
-              className="glass-card p-6 rounded-2xl reflection-overlay"
-              whileHover={{ scale: 1.02, y: -5 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <User className="h-6 w-6 text-accent" />
-                <h3 className="text-xl font-semibold text-foreground">Professional Summary</h3>
-              </div>
-              <p className="text-foreground leading-relaxed">
-                Experienced Data Analyst with expertise in identifying and resolving complex data challenges, delivering actionable insights, and supporting data-driven decision-making. Strong background in machine learning, big data technologies, and financial analytics.
-              </p>
-            </motion.div>
+            <Card className="glass-card h-full">
+              <CardContent className="p-6 sm:p-8">
+                <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-foreground">Professional Summary</h3>
+                <div className="space-y-4 text-muted-foreground mobile-text">
+                  <p>
+                    Dedicated Data Analyst with extensive experience in developing predictive analytics platforms, 
+                    fraud detection systems, and financial risk models. Specialized in leveraging Python, machine learning, 
+                    and big data technologies to drive data-driven decision making.
+                  </p>
+                  <p>
+                    Proven track record in implementing end-to-end data solutions from ETL pipelines to interactive 
+                    dashboards, with expertise in cloud deployment and real-time analytics systems.
+                  </p>
+                  <p>
+                    Committed to continuous learning and staying current with emerging technologies in data science, 
+                    machine learning, and financial analytics through self-directed study and hands-on project implementation.
+                  </p>
+                </div>
 
-            <motion.div 
-              className="glass-card p-6 rounded-2xl reflection-overlay"
-              whileHover={{ scale: 1.02, y: -5 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <Award className="h-6 w-6 text-accent" />
-                <h3 className="text-xl font-semibold text-foreground">Core Strengths</h3>
-              </div>
-              <p className="text-foreground leading-relaxed">
-                Strong communicator and collaborative team player with proven abilities in Problem Solving, Teamwork, Communication, Time Management, and Continuous Learning. Self-learner dedicated to staying current with emerging technologies and best practices.
-              </p>
-            </motion.div>
-            
-            <div className="space-y-4">
-              {[
-                { icon: Calendar, label: "Birthday", value: "02 April 2004" },
-                { icon: Phone, label: "Phone", value: "+91 7826807488" },
-                { icon: MapPin, label: "City", value: "Dindigul, Tamil Nadu, India" },
-                { icon: Mail, label: "Email", value: "manojkumar9384@outlook.com" }
-              ].map((item, index) => (
-                <motion.div 
-                  key={item.label}
-                  className="flex items-center space-x-4 glass-card p-4 rounded-xl reflection-overlay group"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.03, y: -3 }}
-                >
-                  <motion.div
-                    animate={{ rotate: [0, 360] }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                    className="relative"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-full opacity-20 blur-md group-hover:opacity-40 transition-opacity" />
-                    <item.icon className="h-6 w-6 text-accent relative z-10" />
-                  </motion.div>
-                  <span className="text-foreground font-medium">
-                    <strong className="text-primary">{item.label}:</strong> {item.value}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1, type: "spring", bounce: 0.6 }}
-              viewport={{ once: true }}
-              className="pt-6"
-            >
-              <Button asChild size="lg" className="w-full glossy-accent text-accent-foreground font-bold shadow-2xl animate-glow">
-                <a href="#contact">
-                  🚀 Ready to collaborate? Let's connect!
-                </a>
-              </Button>
-            </motion.div>
+                {/* Contact Information */}
+                <div className="mt-6 sm:mt-8 space-y-3">
+                  <h4 className="font-semibold text-foreground mobile-text">Contact Information</h4>
+                  <div className="space-y-2">
+                    {contactInfo.map((contact, index) => (
+                      <motion.div
+                        key={index}
+                        className="flex items-center gap-3 text-muted-foreground mobile-text"
+                        whileHover={{ x: 5 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <contact.icon className="h-4 w-4 text-primary flex-shrink-0" />
+                        {contact.href ? (
+                          <a 
+                            href={contact.href} 
+                            className="hover:text-primary transition-colors"
+                          >
+                            {contact.text}
+                          </a>
+                        ) : (
+                          <span>{contact.text}</span>
+                        )}
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </motion.div>
-          
+
+          {/* Core Strengths */}
           <motion.div
-            initial={{ opacity: 0, x: 100 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, type: "spring", delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
-            className="flex justify-center"
           >
-            <motion.div className="relative">
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary rounded-3xl opacity-30 blur-2xl"
-                animate={{
-                  scale: [1, 1.1, 1],
-                  rotate: [0, 5, -5, 0],
-                }}
-                transition={{ duration: 4, repeat: Infinity }}
-              />
-              <motion.img 
-                src="/lovable-uploads/47058459-6f7e-4d39-bcf6-9b8b0209ffcb.png" 
-                alt="Manoj Kumar K" 
-                className="rounded-3xl w-full max-w-md mx-auto object-cover glass-card reflection-overlay relative z-10"
-                whileHover={{ 
-                  scale: 1.05,
-                  rotateY: 5,
-                }}
-                animate={{
-                  y: [0, -15, 0],
-                }}
-                transition={{ 
-                  duration: 4, 
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-            </motion.div>
+            <Card className="glass-card h-full">
+              <CardContent className="p-6 sm:p-8">
+                <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-foreground">Core Strengths</h3>
+                <div className="grid gap-4 sm:gap-6">
+                  {coreStrengths.map((strength, index) => (
+                    <motion.div
+                      key={index}
+                      className="flex items-start gap-4"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
+                        <strength.icon className="h-5 w-5 text-primary" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-foreground mobile-text">{strength.title}</h4>
+                        <p className="text-muted-foreground text-sm mt-1">{strength.description}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Skills Tags */}
+                <div className="mt-6 sm:mt-8">
+                  <h4 className="font-semibold text-foreground mobile-text mb-3">Key Technologies</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {["Python", "Scikit-learn", "TensorFlow", "Tableau", "AWS", "SQL", "Apache Spark"].map((skill, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3, delay: index * 0.05 + 0.7 }}
+                        viewport={{ once: true }}
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <Badge variant="secondary" className="glass-effect">
+                          {skill}
+                        </Badge>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </motion.div>
         </div>
       </div>

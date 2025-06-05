@@ -1,174 +1,121 @@
 
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Globe, Brain, Target } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { BookOpen, Globe, Heart, TrendingUp, Brain, BarChart3 } from "lucide-react";
 
 export const EducationSection = () => {
-  const educationItems = [
-    {
-      icon: BookOpen,
-      title: "Self-Learning Journey",
-      period: "2021 – Present",
-      description: "Continuous learning through YouTube, online courses, and internet resources focusing on data science, machine learning, and analytics.",
-      skills: ["Data Analysis", "Machine Learning", "Big Data", "Cloud (AWS)", "Database Management", "DevOps", "Statistical Methods"]
+  const learningAreas = [
+    { 
+      icon: BarChart3, 
+      title: "Data Analysis & Machine Learning", 
+      description: "Advanced statistical methods, predictive modeling, and deep learning algorithms"
     },
-    {
-      icon: Brain,
-      title: "Hands-on Projects",
-      period: "2021 – Present",
-      description: "Practical application of learned concepts through self-initiated projects in financial analytics, fraud detection, and portfolio optimization.",
-      skills: ["Project Management", "Problem Solving", "Real-world Application", "Industry Best Practices"]
+    { 
+      icon: TrendingUp, 
+      title: "Big Data & Cloud Technologies", 
+      description: "Apache Spark, Hadoop, AWS services, and scalable data processing"
     },
-    {
-      icon: Globe,
-      title: "Open Source Contributions",
-      period: "Ongoing",
-      description: "Active participation in open-source projects and continuous learning to stay current with emerging technologies.",
-      skills: ["Collaboration", "Code Review", "Version Control", "Community Engagement"]
+    { 
+      icon: Brain, 
+      title: "Financial Analytics", 
+      description: "Risk assessment, portfolio optimization, and fraud detection systems"
     },
-    {
-      icon: Target,
-      title: "Professional Development",
-      period: "Continuous",
-      description: "Focused on developing both technical and soft skills essential for data science and analytics roles.",
-      skills: ["Communication", "Teamwork", "Time Management", "Continuous Learning"]
-    }
   ];
 
   const languages = [
-    { language: "English", level: "Professional" },
-    { language: "Tamil", level: "Native" }
+    { name: "English", level: "Professional", flag: "🇬🇧" },
+    { name: "Tamil", level: "Native", flag: "🇮🇳" },
   ];
 
   const interests = [
-    "Data Science", "Machine Learning", "Financial Analytics", "Open Source", "Continuous Learning"
+    { icon: BarChart3, name: "Data Science", color: "text-blue-500" },
+    { icon: Brain, name: "Machine Learning", color: "text-purple-500" },
+    { icon: TrendingUp, name: "Financial Analytics", color: "text-green-500" },
+    { icon: Heart, name: "Continuous Learning", color: "text-red-500" },
   ];
 
   return (
     <motion.section 
       id="education"
-      className="py-20 px-4 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900 dark:to-pink-900 transition-colors duration-500 relative overflow-hidden"
+      className="py-12 sm:py-16 lg:py-20 mobile-padding bg-muted/50 transition-colors duration-500"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
     >
-      {/* Background particles */}
-      <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-gradient-to-r from-purple-300 to-pink-300 rounded-full opacity-20"
-            animate={{
-              x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
-              y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
-              scale: [0.5, 1.2, 0.5],
-            }}
-            transition={{
-              duration: Math.random() * 20 + 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto">
         <motion.h2 
-          className="text-4xl font-bold text-center mb-16 text-gray-900 dark:text-white"
+          className="mobile-heading font-bold text-center mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          Education & Development
+          Education & Learning
         </motion.h2>
         
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {educationItems.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.02, y: -5 }}
-            >
-              <Card className="h-full border-0 shadow-xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl">
-                <CardHeader>
-                  <div className="flex items-center gap-4">
-                    <motion.div
-                      animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                      className="bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-full"
-                    >
-                      <item.icon className="h-6 w-6 text-white" />
-                    </motion.div>
-                    <div>
-                      <CardTitle className="text-xl text-purple-900 dark:text-purple-300">
-                        {item.title}
-                      </CardTitle>
-                      <p className="text-purple-600 dark:text-purple-400 font-medium">
-                        {item.period}
-                      </p>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-                    {item.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {item.skills.map((skill, skillIndex) => (
-                      <motion.span
-                        key={skillIndex}
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: skillIndex * 0.1 }}
-                        whileHover={{ scale: 1.1 }}
-                        className="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-800 dark:to-pink-800 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm font-medium"
-                      >
-                        {skill}
-                      </motion.span>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+        <motion.p 
+          className="text-center text-muted-foreground mb-8 sm:mb-12 mobile-text max-w-3xl mx-auto"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          Self-Learner in Data Science & Analytics • YouTube, Online Courses, Internet • 2021–Present
+        </motion.p>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Languages Section */}
+        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 mb-8 lg:mb-12">
+          {/* Self-Learning Journey */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            className="lg:col-span-2"
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <Card className="border-0 shadow-xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl">
-              <CardHeader>
-                <CardTitle className="text-2xl text-purple-900 dark:text-purple-300 flex items-center gap-3">
-                  <Globe className="h-6 w-6" />
-                  Languages
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {languages.map((lang, index) => (
+            <Card className="glass-card h-full">
+              <CardContent className="p-6 sm:p-8">
+                <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                  <BookOpen className="h-6 w-6 text-primary" />
+                  <h3 className="text-xl sm:text-2xl font-semibold text-foreground">Self-Learning Journey</h3>
+                </div>
+                
+                <div className="space-y-4 text-muted-foreground mobile-text mb-6">
+                  <p>
+                    Committed to continuous learning and professional development through self-directed study 
+                    and hands-on project implementation since 2021.
+                  </p>
+                  <p>
+                    Extensively studied and implemented concepts in data analysis, machine learning, big data 
+                    technologies, cloud computing (AWS), database management, DevOps practices, and advanced 
+                    statistical methods.
+                  </p>
+                  <p>
+                    Engaged in practical application through real-world projects, staying current with 
+                    industry trends and emerging technologies in the data science ecosystem.
+                  </p>
+                </div>
+
+                <div className="grid gap-4">
+                  <h4 className="font-semibold text-foreground mobile-text">Learning Areas</h4>
+                  {learningAreas.map((area, index) => (
                     <motion.div
                       key={index}
+                      className="flex items-start gap-4 p-4 rounded-lg bg-muted/30"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.2 }}
-                      className="flex justify-between items-center p-3 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/50 dark:to-pink-900/50 rounded-lg"
+                      transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.02 }}
                     >
-                      <span className="font-medium text-gray-900 dark:text-white">
-                        {lang.language}
-                      </span>
-                      <span className="text-purple-600 dark:text-purple-400">
-                        {lang.level}
-                      </span>
+                      <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
+                        <area.icon className="h-5 w-5 text-primary" />
+                      </div>
+                      <div>
+                        <h5 className="font-semibold text-foreground text-sm">{area.title}</h5>
+                        <p className="text-muted-foreground text-xs mt-1">{area.description}</p>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
@@ -176,33 +123,66 @@ export const EducationSection = () => {
             </Card>
           </motion.div>
 
-          {/* Interests Section */}
+          {/* Languages & Interests */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            className="space-y-6"
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <Card className="border-0 shadow-xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl">
-              <CardHeader>
-                <CardTitle className="text-2xl text-purple-900 dark:text-purple-300 flex items-center gap-3">
-                  <Target className="h-6 w-6" />
-                  Interests
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-3">
-                  {interests.map((interest, index) => (
-                    <motion.span
+            {/* Languages */}
+            <Card className="glass-card">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <Globe className="h-5 w-5 text-primary" />
+                  <h3 className="text-lg font-semibold text-foreground">Languages</h3>
+                </div>
+                <div className="space-y-3">
+                  {languages.map((language, index) => (
+                    <motion.div
                       key={index}
-                      initial={{ opacity: 0, scale: 0 }}
+                      className="flex items-center justify-between p-3 rounded-lg bg-muted/30"
+                      initial={{ opacity: 0, scale: 0.9 }}
                       whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.1 }}
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full font-medium shadow-lg"
+                      transition={{ duration: 0.3, delay: index * 0.1 + 0.6 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.02 }}
                     >
-                      {interest}
-                    </motion.span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">{language.flag}</span>
+                        <span className="font-medium text-foreground text-sm">{language.name}</span>
+                      </div>
+                      <Badge variant="secondary" className="text-xs">
+                        {language.level}
+                      </Badge>
+                    </motion.div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Interests */}
+            <Card className="glass-card">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <Heart className="h-5 w-5 text-primary" />
+                  <h3 className="text-lg font-semibold text-foreground">Interests</h3>
+                </div>
+                <div className="grid gap-2">
+                  {interests.map((interest, index) => (
+                    <motion.div
+                      key={index}
+                      className="flex items-center gap-3 p-3 rounded-lg bg-muted/30"
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 + 0.7 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <interest.icon className={`h-4 w-4 ${interest.color}`} />
+                      <span className="text-foreground text-sm font-medium">{interest.name}</span>
+                    </motion.div>
                   ))}
                 </div>
               </CardContent>
