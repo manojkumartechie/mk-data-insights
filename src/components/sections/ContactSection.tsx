@@ -5,21 +5,63 @@ import { Button } from "@/components/ui/button";
 import { Mail, Phone, ExternalLink, Linkedin, Github } from "lucide-react";
 
 export const ContactSection = () => {
+  // Enhanced animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.2,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 60, 
+      scale: 0.9,
+      rotateY: -15
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotateY: 0,
+      transition: {
+        duration: 0.7,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }
+    },
+    hover: {
+      scale: 1.05,
+      y: -8,
+      rotateY: 3,
+      boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <motion.section 
       id="contact"
       className="py-12 sm:py-16 lg:py-20 mobile-padding bg-background/80 transition-colors duration-500"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
     >
       <div className="max-w-4xl mx-auto">
         <motion.h2 
           className="mobile-heading font-bold text-center mb-8 sm:mb-12 lg:mb-16 text-foreground bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30, scale: 0.9 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
         >
           Contact
@@ -64,18 +106,18 @@ export const ContactSection = () => {
           ].map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-              className="w-full"
+              variants={cardVariants}
+              whileHover="hover"
+              className="w-full perspective-1000"
             >
-              <Card className="bg-secondary/80 border-primary/10 shadow-xl border h-full min-h-[200px] sm:min-h-[220px]">
+              <Card className="bg-secondary/80 border-primary/10 shadow-xl border h-full min-h-[200px] sm:min-h-[220px] transform-gpu">
                 <CardHeader className="text-center pb-4">
                   <motion.div
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
+                    whileHover={{ 
+                      rotate: 360,
+                      scale: 1.1,
+                      transition: { duration: 0.6, ease: "easeInOut" }
+                    }}
                     className="flex justify-center"
                   >
                     <item.icon className={`h-6 w-6 sm:h-8 sm:w-8 mb-2 ${item.color}`} />
@@ -88,14 +130,29 @@ export const ContactSection = () => {
                       {item.links.map((link, linkIndex) => (
                         <motion.div
                           key={linkIndex}
-                          whileHover={{ scale: 1.2 }}
+                          initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                          whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                          transition={{ 
+                            duration: 0.5,
+                            delay: linkIndex * 0.1,
+                            type: "spring",
+                            stiffness: 200,
+                            damping: 15
+                          }}
+                          whileHover={{ 
+                            scale: 1.2,
+                            y: -3,
+                            rotate: 5,
+                            transition: { duration: 0.2 }
+                          }}
                           whileTap={{ scale: 0.9 }}
+                          viewport={{ once: true }}
                         >
                           <Button 
                             asChild 
                             variant="ghost" 
                             size="sm" 
-                            className="glossy-icon touch-target text-muted-foreground hover:text-accent animate-pulse-glow group"
+                            className="glossy-icon touch-target text-muted-foreground hover:text-accent animate-pulse-glow group transform-gpu"
                           >
                             <a href={link.href} target="_blank" rel="noopener noreferrer">
                               {link.iconUrl ? (
@@ -117,20 +174,25 @@ export const ContactSection = () => {
                       <p className="text-muted-foreground mobile-text break-words">{item.content}</p>
                       {item.isMobile && (
                         <div className="sm:hidden">
-                          <Button
-                            asChild
-                            variant="outline"
-                            size="sm"
-                            className="glossy-button mt-2 w-full touch-target"
+                          <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                           >
-                            <a 
-                              href={item.title === "Email" ? `mailto:${item.content}` : `tel:${item.content}`}
-                              className="flex items-center justify-center gap-2"
+                            <Button
+                              asChild
+                              variant="outline"
+                              size="sm"
+                              className="glossy-button mt-2 w-full touch-target transform-gpu"
                             >
-                              <item.icon className="h-4 w-4" />
-                              {item.title === "Email" ? "Send Email" : "Call Now"}
-                            </a>
-                          </Button>
+                              <a 
+                                href={item.title === "Email" ? `mailto:${item.content}` : `tel:${item.content}`}
+                                className="flex items-center justify-center gap-2"
+                              >
+                                <item.icon className="h-4 w-4" />
+                                {item.title === "Email" ? "Send Email" : "Call Now"}
+                              </a>
+                            </Button>
+                          </motion.div>
                         </div>
                       )}
                     </div>

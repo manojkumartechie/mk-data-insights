@@ -41,30 +41,73 @@ export const ProjectsSection = () => {
     }
   ];
 
+  // Enhanced animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.2,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const projectVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 80, 
+      scale: 0.9,
+      rotateX: -15
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotateX: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.25, 0.46, 0.45, 0.94],
+        type: "spring",
+        stiffness: 100,
+        damping: 15
+      }
+    }
+  };
+
   return (
     <motion.section 
       id="projects"
       className="py-12 sm:py-16 lg:py-20 mobile-padding bg-background/80 transition-colors duration-500 relative overflow-hidden"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
     >
-      {/* Dynamic background */}
-      <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
+      {/* Enhanced dynamic background with better performance */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-primary/30 rounded-full"
+            initial={{
+              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
+              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
+              scale: 0,
+              opacity: 0
+            }}
             animate={{
-              x: [Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200), Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200)],
-              y: [Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800), Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800)],
+              x: [null, Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200)],
+              y: [null, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800)],
               scale: [0, 2, 0],
+              opacity: [0, 0.6, 0],
             }}
             transition={{
               duration: Math.random() * 15 + 10,
               repeat: Infinity,
               ease: "easeInOut",
+              delay: Math.random() * 5
             }}
           />
         ))}
@@ -73,9 +116,9 @@ export const ProjectsSection = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.h2 
           className="mobile-heading font-bold text-center mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30, scale: 0.9 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
         >
           Project Experience
@@ -83,9 +126,9 @@ export const ProjectsSection = () => {
         
         <motion.p 
           className="text-center text-muted-foreground mb-8 sm:mb-12 lg:mb-16 mobile-text"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           viewport={{ once: true }}
         >
           Data Analyst (Project-Based) • Self-Initiated Projects (2021 – Present)
@@ -96,15 +139,15 @@ export const ProjectsSection = () => {
             <motion.div 
               key={index} 
               className="w-full max-w-md h-full"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: index * 0.1,
-                type: "spring",
-                damping: 15 
+              variants={projectVariants}
+              whileHover={{
+                scale: 1.03,
+                y: -10,
+                transition: {
+                  duration: 0.3,
+                  ease: "easeOut"
+                }
               }}
-              viewport={{ once: true }}
             >
               <Project3DCard
                 {...project}

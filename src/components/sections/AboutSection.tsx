@@ -18,45 +18,82 @@ export const AboutSection = () => {
     { icon: Users, title: "Problem Solving", description: "Complex data challenges with innovative solutions" },
   ];
 
+  // Enhanced animation variants for better performance
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.2,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94] // Custom cubic-bezier for smooth feel
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, x: -50, rotateY: -10 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      rotateY: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      scale: 1.02,
+      y: -5,
+      rotateY: 2,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <motion.section 
       id="about"
       className="py-12 sm:py-16 lg:py-20 mobile-padding bg-muted/30 transition-colors duration-500"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
     >
       <div className="max-w-6xl mx-auto">
         <motion.h2 
           className="mobile-heading font-bold text-center mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          variants={itemVariants}
         >
           About Me
         </motion.h2>
         
         <motion.p 
           className="text-center text-muted-foreground mb-8 sm:mb-12 mobile-text max-w-3xl mx-auto"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
+          variants={itemVariants}
         >
           Passionate Data Analyst with expertise in machine learning, financial analytics, and big data technologies
         </motion.p>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Professional Summary */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            <Card className="glass-card h-full">
+          <motion.div variants={cardVariants} whileHover="hover">
+            <Card className="glass-card h-full transform-gpu">
               <CardContent className="p-6 sm:p-8">
                 <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-foreground">Professional Summary</h3>
                 <div className="space-y-4 text-muted-foreground mobile-text">
@@ -83,14 +120,32 @@ export const AboutSection = () => {
                       <motion.div
                         key={index}
                         className="flex items-center gap-3 text-muted-foreground mobile-text"
-                        whileHover={{ x: 5 }}
-                        transition={{ duration: 0.2 }}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ 
+                          duration: 0.5, 
+                          delay: index * 0.1,
+                          ease: "easeOut"
+                        }}
+                        whileHover={{ 
+                          x: 8,
+                          transition: { duration: 0.2, ease: "easeOut" }
+                        }}
+                        viewport={{ once: true }}
                       >
-                        <contact.icon className="h-4 w-4 text-primary flex-shrink-0" />
+                        <motion.div
+                          whileHover={{ 
+                            scale: 1.1,
+                            rotate: 5,
+                            transition: { duration: 0.2 }
+                          }}
+                        >
+                          <contact.icon className="h-4 w-4 text-primary flex-shrink-0" />
+                        </motion.div>
                         {contact.href ? (
                           <a 
                             href={contact.href} 
-                            className="hover:text-primary transition-colors"
+                            className="hover:text-primary transition-colors duration-300"
                           >
                             {contact.text}
                           </a>
@@ -107,12 +162,29 @@ export const AboutSection = () => {
 
           {/* Core Strengths */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0, x: 50, rotateY: 10 },
+              visible: {
+                opacity: 1,
+                x: 0,
+                rotateY: 0,
+                transition: {
+                  duration: 0.8,
+                  ease: "easeOut"
+                }
+              }
+            }}
+            whileHover={{
+              scale: 1.02,
+              y: -5,
+              rotateY: -2,
+              transition: {
+                duration: 0.3,
+                ease: "easeOut"
+              }
+            }}
           >
-            <Card className="glass-card h-full">
+            <Card className="glass-card h-full transform-gpu">
               <CardContent className="p-6 sm:p-8">
                 <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-foreground">Core Strengths</h3>
                 <div className="grid gap-4 sm:gap-6">
@@ -120,15 +192,31 @@ export const AboutSection = () => {
                     <motion.div
                       key={index}
                       className="flex items-start gap-4"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
+                      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ 
+                        duration: 0.5, 
+                        delay: index * 0.1,
+                        ease: [0.25, 0.46, 0.45, 0.94]
+                      }}
                       viewport={{ once: true }}
-                      whileHover={{ scale: 1.02 }}
+                      whileHover={{ 
+                        scale: 1.03,
+                        x: 5,
+                        transition: { duration: 0.2, ease: "easeOut" }
+                      }}
                     >
-                      <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
+                      <motion.div 
+                        className="p-2 rounded-lg bg-primary/10 flex-shrink-0"
+                        whileHover={{ 
+                          scale: 1.1,
+                          rotate: 360,
+                          backgroundColor: "hsl(var(--primary) / 0.2)",
+                          transition: { duration: 0.3 }
+                        }}
+                      >
                         <strength.icon className="h-5 w-5 text-primary" />
-                      </div>
+                      </motion.div>
                       <div>
                         <h4 className="font-semibold text-foreground mobile-text">{strength.title}</h4>
                         <p className="text-muted-foreground text-sm mt-1">{strength.description}</p>
@@ -144,13 +232,24 @@ export const AboutSection = () => {
                     {["Python", "Scikit-learn", "TensorFlow", "Tableau", "AWS", "SQL", "Apache Spark"].map((skill, index) => (
                       <motion.div
                         key={index}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.3, delay: index * 0.05 + 0.7 }}
+                        initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                        whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                        transition={{ 
+                          duration: 0.4, 
+                          delay: index * 0.05,
+                          type: "spring",
+                          stiffness: 200,
+                          damping: 15
+                        }}
                         viewport={{ once: true }}
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ 
+                          scale: 1.1,
+                          y: -3,
+                          boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
+                          transition: { duration: 0.2 }
+                        }}
                       >
-                        <Badge variant="secondary" className="glass-effect">
+                        <Badge variant="secondary" className="glass-effect cursor-pointer">
                           {skill}
                         </Badge>
                       </motion.div>
