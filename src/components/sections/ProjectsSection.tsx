@@ -6,37 +6,37 @@ export const ProjectsSection = () => {
   const projects = [
     {
       title: "StockSage AI",
-      description: "Predictive analytics platform for stock market forecasting",
+      description: "Developed a predictive stock analytics platform using Python, Pandas, Scikit-learn, and TensorFlow. Implemented ARIMA and LSTM models for time series forecasting with real-time data APIs and interactive Tableau dashboards for risk assessment.",
       image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=500&h=300&fit=crop",
       technologies: ["Python", "Pandas", "Scikit-learn", "TensorFlow", "ARIMA/LSTM", "Tableau", "APIs", "VaR/Monte Carlo"],
       github: "https://github.com/manojkumartechie/StockSageAI"
     },
     {
       title: "BankGuard Analytics", 
-      description: "Real-time fraud detection & customer analytics for banking",
+      description: "Engineered a real-time fraud detection system using Python, SQL, and Scikit-learn. Designed ETL pipelines with Kafka for streaming data ingestion and created Power BI dashboards for transaction alerts and customer segmentation.",
       image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=500&h=300&fit=crop",
-      technologies: ["Python", "SQL", "Scikit-learn", "Kafka", "Power BI", "ETL", "Churn/Segmentation"],
+      technologies: ["Python", "SQL", "Scikit-learn", "Kafka", "Power BI", "ETL", "Fraud Detection", "Customer Segmentation"],
       github: "https://github.com/manojkumartechie/BankGuardAnalytics"
     },
     {
       title: "CreditScore Pro",
-      description: "Credit risk assessment & loan default prediction model", 
+      description: "Built a comprehensive credit risk model leveraging Python, Pandas, Scikit-learn, and XGBoost. Automated data pipelines with Airflow, stored data on AWS S3, and generated risk scores with regulatory compliance reports.", 
       image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=500&h=300&fit=crop",
-      technologies: ["Python", "Pandas", "Scikit-learn", "XGBoost", "AWS S3", "Airflow", "Risk Scoring"],
+      technologies: ["Python", "Pandas", "Scikit-learn", "XGBoost", "AWS S3", "Airflow", "Risk Scoring", "Compliance"],
       github: "https://github.com/manojkumartechie/CreditScorePro"
     },
     {
       title: "PortfolioOptimizer AI",
-      description: "Intelligent portfolio management platform",
+      description: "Designed an intelligent portfolio management tool using Python, PyPortfolioOpt, and Spark. Deployed on AWS EC2 for scalability with Markowitz optimization, portfolio rebalancing, backtesting, and Tableau visualizations.",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop",
-      technologies: ["Python", "PyPortfolioOpt", "Apache Spark", "AWS EC2", "Tableau", "Markowitz", "Backtesting"],
+      technologies: ["Python", "PyPortfolioOpt", "Apache Spark", "AWS EC2", "Tableau", "Markowitz", "Backtesting", "Portfolio Management"],
       github: "https://github.com/manojkumartechie/PortfolioOptimizerAI"
     },
     {
       title: "FinRisk Monitor",
-      description: "Real-time financial analytics & risk management dashboard",
+      description: "Developed a comprehensive real-time financial analytics platform using Spark, Kafka, MongoDB, and Python. Enabled advanced anomaly detection, trend visualization, and automated risk alerts through interactive Power BI dashboards.",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop",
-      technologies: ["Apache Spark", "Kafka", "MongoDB", "Python", "Scikit-learn", "TensorFlow", "Power BI"],
+      technologies: ["Apache Spark", "Kafka", "MongoDB", "Python", "Scikit-learn", "TensorFlow", "Power BI", "Anomaly Detection"],
       github: "https://github.com/manojkumartechie/FinRiskMonitor"
     }
   ];
@@ -88,7 +88,7 @@ export const ProjectsSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          Self-Initiated Projects (2025 – Present)
+          Data Analyst (Project-Based) • Self-Initiated Projects (2021 – Present)
         </motion.p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 justify-items-center">

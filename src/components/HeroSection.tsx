@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -11,7 +10,7 @@ export const HeroSection = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
 
-  const words = ["Data Scientist", "AI Engineer", "Business Intelligence Expert", "Machine Learning Specialist"];
+  const words = ["Data Analyst", "AI Engineer", "Business Intelligence Expert", "Machine Learning Specialist"];
 
   useEffect(() => {
     const handleType = () => {
@@ -192,8 +191,7 @@ export const HeroSection = () => {
               }}
               transition={{ duration: 0.3 }}
             >
-              🚀 Transforming complex data into <strong>actionable insights</strong> that drive business success. 
-              Ready to unlock the power of your data and accelerate your growth!
+              🚀 Experienced in identifying and resolving complex data challenges, delivering <strong>actionable insights</strong>, and supporting data-driven decision-making with expertise in machine learning, big data technologies, and financial analytics.
             </motion.p>
           </motion.div>
           

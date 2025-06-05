@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Calendar, Phone, MapPin, Mail } from "lucide-react";
+import { Calendar, Phone, MapPin, Mail, User, Award } from "lucide-react";
 
 export const AboutSection = () => {
   return (
@@ -65,15 +65,33 @@ export const AboutSection = () => {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <motion.p 
-              className="text-xl text-foreground leading-relaxed glass-card p-6 rounded-2xl reflection-overlay"
+            <motion.div 
+              className="glass-card p-6 rounded-2xl reflection-overlay"
               whileHover={{ scale: 1.02, y: -5 }}
               transition={{ duration: 0.3 }}
             >
-              🎯 Experienced in identifying and resolving complex data challenges, delivering actionable insights, and supporting data-driven decision-making. 
-              <br/><br/>
-              💡 Strong communicator and collaborative team player with proven abilities in Problem Solving, Teamwork, Communication, Time Management, and Continuous Learning.
-            </motion.p>
+              <div className="flex items-center gap-3 mb-4">
+                <User className="h-6 w-6 text-accent" />
+                <h3 className="text-xl font-semibold text-foreground">Professional Summary</h3>
+              </div>
+              <p className="text-foreground leading-relaxed">
+                Experienced Data Analyst with expertise in identifying and resolving complex data challenges, delivering actionable insights, and supporting data-driven decision-making. Strong background in machine learning, big data technologies, and financial analytics.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="glass-card p-6 rounded-2xl reflection-overlay"
+              whileHover={{ scale: 1.02, y: -5 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <Award className="h-6 w-6 text-accent" />
+                <h3 className="text-xl font-semibold text-foreground">Core Strengths</h3>
+              </div>
+              <p className="text-foreground leading-relaxed">
+                Strong communicator and collaborative team player with proven abilities in Problem Solving, Teamwork, Communication, Time Management, and Continuous Learning. Self-learner dedicated to staying current with emerging technologies and best practices.
+              </p>
+            </motion.div>
             
             <div className="space-y-4">
               {[

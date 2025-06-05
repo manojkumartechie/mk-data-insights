@@ -5,20 +5,29 @@ import { Badge } from "@/components/ui/badge";
 
 export const SkillsSection = () => {
   const skills = {
-    "Programming & Databases": [
-      "Python", "R", "C++", "Java", "SQL", "Oracle PL/SQL", "MongoDB", "XML"
+    "Programming & DBs": [
+      "Python", "R", "Java", "SQL (PL/SQL)", "MongoDB", "XML"
     ],
-    "Data Analysis & Machine Learning": [
+    "Data Analysis & ML": [
       "Pandas", "NumPy", "Scikit-learn", "TensorFlow", "PyTorch", "CUDA"
     ],
-    "Data Visualization & BI": [
-      "Tableau", "Power BI", "Excel/VBA", "Matplotlib", "Seaborn"
+    "Visualization & BI": [
+      "Tableau", "Power BI", "Excel (VBA)"
     ],
     "Big Data & Cloud": [
-      "Apache Spark", "Hadoop", "AWS S3/EC2", "Kafka"
+      "Apache Spark", "Hadoop", "AWS (S3, EC2)"
     ],
     "DevOps & Tools": [
-      "GitHub", "Linux Bash", "Docker", "Kubernetes", "Airflow"
+      "GitHub", "Linux Bash", "Docker", "Kubernetes", "Airflow", "Kafka"
+    ],
+    "Data Handling": [
+      "Data Cleaning", "Wrangling", "ETL", "Data Quality"
+    ],
+    "Statistics": [
+      "Regression", "Hypothesis Testing", "A/B Testing", "Trend Analysis"
+    ],
+    "Soft Skills": [
+      "Problem Solving", "Teamwork", "Communication", "Time Management", "Learning"
     ]
   };
 
@@ -60,7 +69,7 @@ export const SkillsSection = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          Skills
+          Technical Skills
         </motion.h2>
         
         <div className="space-y-8">
@@ -71,7 +80,7 @@ export const SkillsSection = () => {
               whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
               transition={{ 
                 duration: 0.8, 
-                delay: index * 0.2,
+                delay: index * 0.1,
                 type: "spring",
                 damping: 15
               }}
