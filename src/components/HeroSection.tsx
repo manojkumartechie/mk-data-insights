@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Download, ExternalLink, Github, Linkedin, Code, BarChart3, ArrowRight, Sparkles, Zap } from "lucide-react";
+import { Download, ExternalLink, Github, Linkedin, ArrowRight, Sparkles, Zap } from "lucide-react";
 import { Hero3D } from "@/components/Hero3D";
 
 export const HeroSection = () => {
@@ -222,7 +222,7 @@ export const HeroSection = () => {
                   >
                     <Download className="mr-2 sm:mr-3 h-5 sm:h-6 w-5 sm:w-6" />
                   </motion.div>
-                  Download My CV
+                  Download My Resume
                   <ArrowRight className="ml-2 h-4 sm:h-5 w-4 sm:w-5" />
                 </a>
               </Button>
@@ -280,7 +280,7 @@ export const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Enhanced Social Links with better mobile spacing */}
+          {/* Enhanced Social Links with LeetCode and Kaggle icons */}
           <motion.div 
             variants={itemVariants}
             className="flex justify-center space-x-4 sm:space-x-6"
@@ -288,8 +288,18 @@ export const HeroSection = () => {
             {[
               { href: "https://github.com/manojkumartechie", icon: Github, color: "hover:text-gray-900" },
               { href: "https://www.linkedin.com/in/manojkumartechie/", icon: Linkedin, color: "hover:text-blue-600" },
-              { href: "https://leetcode.com/manojkumartechie/", icon: Code, color: "hover:text-orange-500" },
-              { href: "https://www.kaggle.com/manojkumartechie", icon: BarChart3, color: "hover:text-cyan-500" }
+              { 
+                href: "https://leetcode.com/manojkumartechie/", 
+                iconUrl: "https://img.icons8.com/?size=100&id=9L16NypUzu38&format=png&color=000000",
+                name: "LeetCode",
+                color: "hover:text-orange-500"
+              },
+              { 
+                href: "https://www.kaggle.com/manojkumartechie", 
+                iconUrl: "https://img.icons8.com/?size=100&id=Omk4fWoSmCHm&format=png&color=000000",
+                name: "Kaggle",
+                color: "hover:text-cyan-500"
+              }
             ].map((social, index) => (
               <motion.div
                 key={social.href}
@@ -311,9 +321,17 @@ export const HeroSection = () => {
                 }}
                 className="perspective-1000"
               >
-                <Button asChild variant="ghost" size="lg" className="bg-white/20 backdrop-blur-md border border-white/30 shadow-xl p-3 sm:p-4">
+                <Button asChild variant="ghost" size="lg" className="bg-white/20 backdrop-blur-md border border-white/30 shadow-xl p-3 sm:p-4 group">
                   <a href={social.href} target="_blank" className={`transition-colors duration-300 ${social.color}`}>
-                    <social.icon className="h-6 sm:h-8 w-6 sm:w-8" />
+                    {social.iconUrl ? (
+                      <img 
+                        src={social.iconUrl} 
+                        alt={social.name || ""} 
+                        className="h-6 sm:h-8 w-6 sm:w-8 filter brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-300" 
+                      />
+                    ) : (
+                      <social.icon className="h-6 sm:h-8 w-6 sm:w-8" />
+                    )}
                   </a>
                 </Button>
               </motion.div>
