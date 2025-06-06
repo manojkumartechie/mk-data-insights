@@ -207,12 +207,12 @@ export const Navigation = () => {
             animate="visible"
             exit="exit"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 backdrop-blur-md bg-white/5 border border-white/10 rounded-b-xl mt-2 shadow-xl">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 backdrop-blur-lg bg-black/40 border border-white/20 rounded-b-xl mt-2 shadow-2xl">
               {navItems.map((item, index) => (
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  className="text-white hover:text-accent block mobile-nav-item rounded-lg font-medium backdrop-blur-sm bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 touch-target shadow-sm"
+                  className="text-white hover:text-accent block mobile-nav-item rounded-lg font-medium backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 touch-target shadow-sm"
                   onClick={() => setIsOpen(false)}
                   variants={itemVariants}
                   whileHover={{ 

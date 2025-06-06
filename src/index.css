@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -94,11 +95,6 @@
     background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(220 35% 10%) 100%);
     min-height: 100vh;
   }
-}
-
-/* Hide all progress bars */
-.progress-bar {
-  display: none;
 }
 
 @layer utilities {
