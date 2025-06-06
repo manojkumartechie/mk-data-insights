@@ -88,7 +88,7 @@ export const Navigation = () => {
 
   return (
     <motion.nav 
-      className="fixed top-0 left-0 right-0 z-50 glass-card shadow-2xl border-b border-white/10"
+      className="fixed top-0 left-0 right-0 z-50 md:glass-card md:shadow-2xl md:border-b md:border-white/10 backdrop-blur-md bg-transparent md:bg-black/20"
       variants={navVariants}
       initial="hidden"
       animate="visible"
@@ -105,7 +105,7 @@ export const Navigation = () => {
             }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-shimmer">
+            <span className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-white via-accent to-white md:from-primary md:via-accent md:to-primary bg-clip-text text-transparent animate-shimmer drop-shadow-lg">
               Manoj Kumar K
             </span>
           </motion.div>
@@ -185,13 +185,13 @@ export const Navigation = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsOpen(!isOpen)}
-                className="glass-effect touch-target transform-gpu"
+                className="backdrop-blur-sm bg-white/10 border border-white/20 text-white hover:bg-white/20 touch-target transform-gpu shadow-lg"
               >
                 <motion.div
                   animate={{ rotate: isOpen ? 180 : 0 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
-                  {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                  {isOpen ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
                 </motion.div>
               </Button>
             </motion.div>
@@ -207,12 +207,12 @@ export const Navigation = () => {
             animate="visible"
             exit="exit"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 glass-card rounded-b-xl mt-2">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 backdrop-blur-lg bg-black/40 border border-white/20 rounded-b-xl mt-2 shadow-2xl">
               {navItems.map((item, index) => (
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  className="text-muted-foreground hover:text-accent block mobile-nav-item rounded-lg font-medium glass-effect transition-all duration-300 touch-target"
+                  className="text-white hover:text-accent block mobile-nav-item rounded-lg font-medium backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 touch-target shadow-sm"
                   onClick={() => setIsOpen(false)}
                   variants={itemVariants}
                   whileHover={{ 
@@ -241,17 +241,17 @@ export const Navigation = () => {
                       asChild 
                       variant="ghost" 
                       size="sm" 
-                      className="glossy-icon touch-target group animate-pulse-glow transform-gpu"
+                      className="backdrop-blur-sm bg-white/10 border border-white/20 text-white hover:bg-white/20 touch-target group animate-pulse-glow transform-gpu shadow-lg"
                     >
                       <a href={social.href} target="_blank" rel="noopener noreferrer">
                         {social.iconUrl ? (
                           <img 
                             src={social.iconUrl} 
                             alt={social.name || ""} 
-                            className="h-5 w-5 transition-all duration-300 filter brightness-0 invert group-hover:brightness-100 group-hover:invert-0"
+                            className="h-5 w-5 transition-all duration-300 filter brightness-0 invert"
                           />
                         ) : (
-                          <social.icon className="h-5 w-5 text-accent group-hover:text-primary transition-colors duration-300" />
+                          <social.icon className="h-5 w-5 text-white group-hover:text-accent transition-colors duration-300" />
                         )}
                       </a>
                     </Button>
