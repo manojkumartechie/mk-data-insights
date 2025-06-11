@@ -1,47 +1,43 @@
 
-import { Canvas } from '@react-three/fiber';
-import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Zap, Sparkles, Rocket } from 'lucide-react';
-import * as THREE from 'three';
 
 function SimpleCTAElements() {
-  const groupRef = useRef<THREE.Group>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   
-  useFrame((state) => {
-    const time = state.clock.getElapsedTime();
-    if (groupRef.current) {
-      groupRef.current.rotation.y = time * 0.1;
-    }
-  });
+  useEffect(() => {
+    if (!containerRef.current) return;
+    
+    const shapes = containerRef.current.querySelectorAll('.cta-shape');
+    let animationId: number;
+    
+    const animate = () => {
+      const time = Date.now() * 0.001;
+      shapes.forEach((shape, index) => {
+        const element = shape as HTMLElement;
+        const offset = index * 0.8;
+        element.style.transform = `translateY(${Math.sin(time + offset) * 15}px) rotate(${time * 10 + offset * 30}deg)`;
+      });
+      animationId = requestAnimationFrame(animate);
+    };
+    
+    animate();
+    
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
+  }, []);
   
   return (
-    <group ref={groupRef}>
-      <mesh position={[0, 0, 0]}>
-        <sphereGeometry args={[0.8]} />
-        <meshStandardMaterial
-          color="#3B82F6"
-          transparent
-          opacity={0.7}
-        />
-      </mesh>
-      
-      <mesh position={[-1.5, 0.5, -1]}>
-        <sphereGeometry args={[0.3]} />
-        <meshStandardMaterial
-          color="#10B981"
-        />
-      </mesh>
-      
-      <mesh position={[1.5, -0.5, 1]}>
-        <sphereGeometry args={[0.4]} />
-        <meshStandardMaterial
-          color="#F59E0B"
-        />
-      </mesh>
-    </group>
+    <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-none">
+      <div className="cta-shape absolute top-1/2 left-1/2 w-24 h-24 bg-blue-500 rounded-full opacity-70 -translate-x-1/2 -translate-y-1/2" />
+      <div className="cta-shape absolute top-1/3 left-1/4 w-8 h-8 bg-green-500 rounded-full" />
+      <div className="cta-shape absolute bottom-1/3 right-1/4 w-12 h-12 bg-yellow-500 rounded-full" />
+    </div>
   );
 }
 
@@ -50,23 +46,7 @@ export const Interactive3DCTA = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
       {/* 3D Background */}
       <div className="absolute inset-0 z-0">
-        <Canvas 
-          camera={{ position: [0, 0, 6] }}
-          gl={{ 
-            antialias: true, 
-            alpha: true,
-            powerPreference: "high-performance"
-          }}
-          onCreated={({ gl }) => {
-            gl.setClearColor('#000000', 0);
-          }}
-          fallback={<div className="w-full h-full bg-gradient-to-br from-blue-900 to-purple-900" />}
-        >
-          <ambientLight intensity={0.4} />
-          <pointLight position={[5, 5, 5]} intensity={0.8} color="#60A5FA" />
-          <pointLight position={[-5, -5, -5]} intensity={0.6} color="#F59E0B" />
-          <SimpleCTAElements />
-        </Canvas>
+        <SimpleCTAElements />
       </div>
       
       {/* Animated background particles */}

@@ -1,67 +1,47 @@
 
-import { Canvas } from '@react-three/fiber';
-import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+import { useEffect, useRef } from 'react';
 
 function SimpleFloatingShapes() {
-  const groupRef = useRef<THREE.Group>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   
-  useFrame((state) => {
-    const time = state.clock.getElapsedTime();
-    if (groupRef.current) {
-      groupRef.current.rotation.y = time * 0.1;
-    }
-  });
+  useEffect(() => {
+    if (!containerRef.current) return;
+    
+    const shapes = containerRef.current.querySelectorAll('.floating-shape');
+    let animationId: number;
+    
+    const animate = () => {
+      const time = Date.now() * 0.001;
+      shapes.forEach((shape, index) => {
+        const element = shape as HTMLElement;
+        const offset = index * 0.5;
+        element.style.transform = `translateY(${Math.sin(time + offset) * 10}px) rotate(${time * 20 + offset * 45}deg)`;
+      });
+      animationId = requestAnimationFrame(animate);
+    };
+    
+    animate();
+    
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
+  }, []);
   
   return (
-    <group ref={groupRef}>
-      <mesh position={[0, 0, 0]}>
-        <sphereGeometry args={[1]} />
-        <meshStandardMaterial
-          color="#60A5FA"
-          transparent
-          opacity={0.6}
-        />
-      </mesh>
-      
-      <mesh position={[-2, 1, -1]}>
-        <sphereGeometry args={[0.5]} />
-        <meshStandardMaterial
-          color="#12D640"
-        />
-      </mesh>
-      
-      <mesh position={[2, -0.5, 0]}>
-        <sphereGeometry args={[0.7]} />
-        <meshStandardMaterial
-          color="#F59E0B"
-        />
-      </mesh>
-    </group>
+    <div ref={containerRef} className="relative w-full h-full">
+      <div className="floating-shape absolute top-1/2 left-1/2 w-20 h-20 bg-blue-400 rounded-full opacity-60 -translate-x-1/2 -translate-y-1/2" />
+      <div className="floating-shape absolute top-1/3 left-1/4 w-12 h-12 bg-green-400 rounded-full" />
+      <div className="floating-shape absolute bottom-1/3 right-1/4 w-16 h-16 bg-yellow-400 rounded-full" />
+    </div>
   );
 }
 
 export const Hero3D = () => {
   return (
-    <div className="absolute inset-0 w-full h-full">
-      <Canvas 
-        camera={{ position: [0, 0, 5], fov: 75 }}
-        gl={{ 
-          antialias: true, 
-          alpha: true,
-          powerPreference: "high-performance"
-        }}
-        onCreated={({ gl }) => {
-          gl.setClearColor('#000000', 0);
-        }}
-        fallback={<div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100" />}
-      >
-        <ambientLight intensity={0.4} />
-        <pointLight position={[5, 5, 5]} intensity={0.6} color="#60A5FA" />
-        <pointLight position={[-5, -5, -5]} intensity={0.4} color="#F59E0B" />
-        <SimpleFloatingShapes />
-      </Canvas>
+    <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
+      <SimpleFloatingShapes />
     </div>
   );
 };
