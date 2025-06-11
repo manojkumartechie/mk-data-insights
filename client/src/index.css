@@ -328,13 +328,112 @@
 
 
 @layer utilities {
-  .perspective-1000 {
-    perspective: 1000px;
+  .perspective-1000 { perspective: 1000px; }
+  .perspective-2000 { perspective: 2000px; }
+  .transform-3d { transform-style: preserve-3d; }
+  .transform-gpu { transform: translate3d(0, 0, 0); }
+  
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   }
   
-  .transform-gpu {
-    transform: translate3d(0, 0, 0);
+  .glass-subtle {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
+  
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+  
+  .glow {
+    box-shadow: 
+      0 0 20px rgba(139, 92, 246, 0.4),
+      0 0 40px rgba(139, 92, 246, 0.3),
+      0 0 80px rgba(139, 92, 246, 0.2);
+  }
+  
+  .glow-accent {
+    box-shadow: 
+      0 0 15px rgba(236, 72, 153, 0.4),
+      0 0 30px rgba(236, 72, 153, 0.3),
+      0 0 60px rgba(236, 72, 153, 0.2);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-accent {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+  
+  .hover-float {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .hover-float:hover {
+    transform: translateY(-8px) rotateY(5deg);
+  }
+  
+  .bg-animated {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+  
+  .bg-grid {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  .particles::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
+      radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.4), transparent),
+      radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.3), transparent);
+    background-repeat: repeat;
+    background-size: 120px 120px;
+    animation: particleFloat 20s linear infinite;
+  }
+  
+  .mono { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+  .rounded-square { border-radius: 20%; }
   
   .gradient-blur {
     backdrop-filter: blur(20px);
@@ -556,9 +655,29 @@
 }
 
 /* Animation keyframes for premium effects */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-30px) rotate(120deg); }
+  66% { transform: translateY(-15px) rotate(240deg); }
+  100% { transform: translateY(0px) rotate(360deg); }
+}
+
 @keyframes shimmer {
   0% { transform: translateX(-100%) rotate(45deg); }
   100% { transform: translateX(200%) rotate(45deg); }
+}
+
+@keyframes morphing {
+  0%, 100% { border-radius: 50% 30% 70% 40%; }
+  25% { border-radius: 30% 60% 40% 70%; }
+  50% { border-radius: 70% 40% 30% 60%; }
+  75% { border-radius: 40% 70% 60% 30%; }
 }
 
 @keyframes float {
