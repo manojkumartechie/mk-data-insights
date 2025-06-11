@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -18,7 +17,6 @@ export const AboutSection = () => {
     { icon: Users, title: "Problem Solving", description: "Complex data challenges with innovative solutions" },
   ];
 
-  // Enhanced animation variants for better performance
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -39,7 +37,7 @@ export const AboutSection = () => {
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94] // Custom cubic-bezier for smooth feel
+        ease: [0.25, 0.46, 0.45, 0.94]
       }
     }
   };
@@ -69,7 +67,7 @@ export const AboutSection = () => {
   return (
     <motion.section 
       id="about"
-      className="py-12 sm:py-16 lg:py-20 mobile-padding bg-muted/30 transition-colors duration-500"
+      className="responsive-spacing mobile-padding bg-muted/30 transition-colors duration-500"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
@@ -90,7 +88,7 @@ export const AboutSection = () => {
           Passionate Data Analyst with expertise in machine learning, financial analytics, and big data technologies
         </motion.p>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid lg:grid-cols-2 responsive-gap">
           {/* Professional Summary */}
           <motion.div variants={cardVariants} whileHover="hover">
             <Card className="glass-card h-full transform-gpu">
@@ -145,12 +143,12 @@ export const AboutSection = () => {
                         {contact.href ? (
                           <a 
                             href={contact.href} 
-                            className="hover:text-primary transition-colors duration-300"
+                            className="hover:text-primary transition-colors duration-300 break-all"
                           >
                             {contact.text}
                           </a>
                         ) : (
-                          <span>{contact.text}</span>
+                          <span className="break-all">{contact.text}</span>
                         )}
                       </motion.div>
                     ))}
@@ -217,7 +215,7 @@ export const AboutSection = () => {
                       >
                         <strength.icon className="h-5 w-5 text-primary" />
                       </motion.div>
-                      <div>
+                      <div className="min-w-0 flex-1">
                         <h4 className="font-semibold text-foreground mobile-text">{strength.title}</h4>
                         <p className="text-muted-foreground text-sm mt-1">{strength.description}</p>
                       </div>
@@ -249,7 +247,7 @@ export const AboutSection = () => {
                           transition: { duration: 0.2 }
                         }}
                       >
-                        <Badge variant="secondary" className="glass-effect cursor-pointer">
+                        <Badge variant="secondary" className="glass-effect cursor-pointer touch-target">
                           {skill}
                         </Badge>
                       </motion.div>

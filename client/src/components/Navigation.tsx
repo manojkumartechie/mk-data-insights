@@ -6,15 +6,27 @@ import { Menu, X, Github, Linkedin, Mail } from "lucide-react";
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
     
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    
     checkMobile();
+    handleScroll();
+    
     window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const navItems = [
@@ -28,7 +40,7 @@ export const Navigation = () => {
   const smoothScrollTo = (elementId: string) => {
     const element = document.getElementById(elementId);
     if (element) {
-      const headerHeight = isMobile ? 0 : 80;
+      const headerHeight = isMobile ? 60 : 80;
       const elementPosition = element.offsetTop - headerHeight;
       
       window.scrollTo({
@@ -50,12 +62,16 @@ export const Navigation = () => {
       {/* Desktop Navigation */}
       {!isMobile && (
         <motion.nav 
-          className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/20 border-b border-white/10"
+          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+            scrolled 
+              ? 'glass-card border-b border-white/10' 
+              : 'bg-transparent'
+          }`}
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto mobile-padding">
             <div className="flex justify-between items-center h-20">
               {/* Logo */}
               <motion.div 
@@ -105,7 +121,7 @@ export const Navigation = () => {
                         variant="ghost"
                         size="sm"
                         asChild
-                        className="text-muted-foreground hover:text-accent"
+                        className="text-muted-foreground hover:text-accent glossy-icon"
                       >
                         <a href={social.href} target="_blank" rel="noopener noreferrer">
                           <IconComponent className="h-5 w-5" />
@@ -133,7 +149,7 @@ export const Navigation = () => {
           >
             <motion.button
               onClick={() => setIsOpen(!isOpen)}
-              className="bg-primary text-primary-foreground rounded-full p-4 shadow-lg backdrop-blur-md"
+              className="glossy-button text-primary-foreground rounded-full p-4 shadow-lg touch-target"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -175,7 +191,7 @@ export const Navigation = () => {
               >
                 <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
                 <motion.div
-                  className="absolute bottom-24 right-6 bg-background/95 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-white/10 min-w-[200px]"
+                  className="absolute bottom-24 right-6 glass-card rounded-2xl p-6 shadow-2xl border border-white/10 min-w-[200px]"
                   initial={{ scale: 0, opacity: 0, y: 50 }}
                   animate={{ scale: 1, opacity: 1, y: 0 }}
                   exit={{ scale: 0, opacity: 0, y: 50 }}
@@ -187,7 +203,7 @@ export const Navigation = () => {
                       <motion.button
                         key={item.label}
                         onClick={() => smoothScrollTo(item.id)}
-                        className="block w-full text-left px-4 py-3 rounded-lg text-foreground hover:bg-accent/20 transition-colors duration-200"
+                        className="block w-full text-left px-4 py-3 rounded-lg text-foreground hover:bg-accent/20 transition-colors duration-200 touch-target"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
@@ -208,7 +224,7 @@ export const Navigation = () => {
                               href={social.href}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-muted-foreground hover:text-accent p-2"
+                              className="text-muted-foreground hover:text-accent p-2 glossy-icon touch-target"
                               whileHover={{ scale: 1.2, rotate: 5 }}
                               whileTap={{ scale: 0.9 }}
                             >

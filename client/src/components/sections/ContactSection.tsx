@@ -1,11 +1,9 @@
-
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, ExternalLink, Linkedin, Github } from "lucide-react";
 
 export const ContactSection = () => {
-  // Enhanced animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -50,7 +48,7 @@ export const ContactSection = () => {
   return (
     <motion.section 
       id="contact"
-      className="py-12 sm:py-16 lg:py-20 mobile-padding bg-background/80 transition-colors duration-500"
+      className="responsive-spacing mobile-padding bg-background/80 transition-colors duration-500"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
@@ -67,7 +65,7 @@ export const ContactSection = () => {
           Contact
         </motion.h2>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="mobile-grid">
           {[
             { 
               icon: Mail, 
@@ -110,7 +108,7 @@ export const ContactSection = () => {
               whileHover="hover"
               className="w-full perspective-1000"
             >
-              <Card className="bg-secondary/80 border-primary/10 shadow-xl border h-full min-h-[200px] sm:min-h-[220px] transform-gpu">
+              <Card className="glass-card border-primary/10 shadow-xl border h-full min-h-[200px] sm:min-h-[220px] transform-gpu">
                 <CardHeader className="text-center pb-4">
                   <motion.div
                     whileHover={{ 
@@ -126,7 +124,7 @@ export const ContactSection = () => {
                 </CardHeader>
                 <CardContent className="text-center pt-0">
                   {item.links ? (
-                    <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+                    <div className="flex flex-wrap justify-center responsive-gap">
                       {item.links.map((link, linkIndex) => (
                         <motion.div
                           key={linkIndex}

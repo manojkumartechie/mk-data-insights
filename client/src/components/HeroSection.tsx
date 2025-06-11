@@ -140,13 +140,14 @@ export const HeroSection = () => {
       
       {/* Enhanced Animated Background Elements */}
       <div className="absolute inset-0 z-10">
-        {[...Array(80)].map((_, i) => (
+        {[...Array(60)].map((_, i) => (
           <motion.div
             key={i}
             className={`absolute rounded-full opacity-20 ${
-              i % 3 === 0 ? 'w-3 h-3 bg-blue-400' : 
-              i % 3 === 1 ? 'w-2 h-2 bg-purple-400' : 
-              'w-1 h-1 bg-cyan-400'
+              i % 4 === 0 ? 'w-3 h-3 bg-blue-400' : 
+              i % 4 === 1 ? 'w-2 h-2 bg-purple-400' : 
+              i % 4 === 2 ? 'w-1 h-1 bg-cyan-400' :
+              'w-4 h-4 bg-pink-400'
             }`}
             initial={{ 
               x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
@@ -157,6 +158,7 @@ export const HeroSection = () => {
               x: [null, Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200)],
               scale: [1, 1.5, 1],
               opacity: [0.2, 0.6, 0.2],
+              rotate: [0, 360],
             }}
             transition={{
               duration: Math.random() * 15 + 10,
@@ -168,23 +170,24 @@ export const HeroSection = () => {
         ))}
       </div>
 
-      {/* Enhanced Gradient Overlay with better mobile support */}
+      {/* Enhanced Gradient Overlay */}
       <div className="absolute inset-0 z-20 bg-gradient-to-br from-blue-50/90 via-purple-50/80 to-indigo-100/90 dark:from-gray-900/95 dark:via-blue-900/90 dark:to-gray-800/95"></div>
       
-      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-30 max-w-7xl mx-auto mobile-padding">
         <motion.div
+          ref={containerRef}
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="text-center space-y-6 lg:space-y-8 max-w-5xl mx-auto"
         >
-          {/* Enhanced Main Heading with better mobile responsiveness */}
+          {/* Enhanced Main Heading with responsive typography */}
           <motion.div
             variants={itemVariants}
             className="perspective-1000"
           >
             <motion.h1 
-              className="text-4xl sm:text-5xl lg:text-7xl font-black text-gray-900 dark:text-white transform-gpu"
+              className="mobile-heading font-black text-gray-900 dark:text-white transform-gpu"
               style={{
                 textShadow: "0 10px 30px rgba(0,0,0,0.3)",
                 transform: "rotateX(10deg)",
@@ -209,13 +212,13 @@ export const HeroSection = () => {
             </motion.h1>
           </motion.div>
           
-          {/* Enhanced Animated Subtitle with better mobile sizing */}
+          {/* Enhanced Animated Subtitle */}
           <motion.div
             variants={itemVariants}
             className="perspective-1000"
           >
             <motion.h2 
-              className="text-2xl sm:text-3xl lg:text-4xl text-gray-700 dark:text-gray-200 transform-gpu"
+              className="mobile-subheading text-gray-700 dark:text-gray-200 transform-gpu"
               style={{ transform: "rotateX(5deg)" }}
               whileHover={{ rotateX: 0 }}
             >
@@ -236,7 +239,7 @@ export const HeroSection = () => {
                   {typedText}
                 </motion.span>
                 <motion.span 
-                  className="text-blue-600 text-3xl lg:text-4xl"
+                  className="text-blue-600 text-2xl sm:text-3xl lg:text-4xl"
                   animate={{ opacity: [1, 0] }}
                   transition={{ duration: 0.8, repeat: Infinity }}
                 >
@@ -246,13 +249,13 @@ export const HeroSection = () => {
             </motion.h2>
           </motion.div>
           
-          {/* Enhanced Description with better mobile padding */}
+          {/* Enhanced Description with responsive design */}
           <motion.div
             variants={itemVariants}
             className="perspective-1000"
           >
             <motion.p 
-              className="text-lg sm:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-4xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-4 sm:p-6 shadow-2xl border border-white/20"
+              className="text-base sm:text-lg lg:text-xl xl:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-4xl mx-auto glass-card p-4 sm:p-6 lg:p-8 shadow-2xl border border-white/20"
               style={{ transform: "rotateX(5deg)" }}
               whileHover={{ 
                 rotateX: 0,
@@ -265,10 +268,10 @@ export const HeroSection = () => {
             </motion.p>
           </motion.div>
           
-          {/* Enhanced Call to Action Buttons with better mobile layout */}
+          {/* Enhanced Call to Action Buttons with responsive layout */}
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 justify-center"
+            className="flex flex-col sm:flex-row flex-wrap responsive-gap justify-center"
           >
             <motion.div
               whileHover={{ scale: 1.1, y: -5 }}
@@ -282,7 +285,7 @@ export const HeroSection = () => {
               }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <Button asChild size="lg" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold px-6 sm:px-8 py-4 text-base sm:text-lg shadow-2xl border-0">
+              <Button asChild size="lg" className="w-full sm:w-auto glossy-button text-primary-foreground font-bold px-6 sm:px-8 py-4 text-base sm:text-lg shadow-2xl border-0 touch-target">
                 <a href="https://drive.google.com/file/d/1I3trn1h04xdu1u-Exw6edlgC1PVmOi22/view?usp=sharing" target="_blank">
                   <motion.div
                     animate={{ rotate: [0, 360] }}
@@ -308,7 +311,7 @@ export const HeroSection = () => {
               }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto border-2 border-green-500 hover:bg-green-500 hover:text-white font-bold px-6 sm:px-8 py-4 text-base sm:text-lg shadow-2xl">
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto border-2 border-green-500 hover:bg-green-500 hover:text-white font-bold px-6 sm:px-8 py-4 text-base sm:text-lg shadow-2xl touch-target">
                 <a href="#projects">
                   <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
@@ -334,7 +337,7 @@ export const HeroSection = () => {
               }}
               transition={{ duration: 1.8, repeat: Infinity }}
             >
-              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto border-2 border-red-500 hover:bg-red-500 hover:text-white font-bold px-6 sm:px-8 py-4 text-base sm:text-lg shadow-2xl">
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto border-2 border-red-500 hover:bg-red-500 hover:text-white font-bold px-6 sm:px-8 py-4 text-base sm:text-lg shadow-2xl touch-target">
                 <a href="#contact">
                   <motion.div
                     animate={{ rotate: [0, 15, -15, 0] }}
@@ -348,10 +351,10 @@ export const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Enhanced Social Links with LeetCode and Kaggle icons */}
+          {/* Enhanced Social Links with responsive design */}
           <motion.div 
             variants={itemVariants}
-            className="flex justify-center space-x-4 sm:space-x-6"
+            className="flex justify-center space-x-3 sm:space-x-4 lg:space-x-6"
           >
             {[
               { href: "https://github.com/manojkumartechie", icon: Github, color: "hover:text-gray-900" },
@@ -389,7 +392,7 @@ export const HeroSection = () => {
                 }}
                 className="perspective-1000"
               >
-                <Button asChild variant="ghost" size="lg" className="bg-white/20 backdrop-blur-md border border-white/30 shadow-xl p-3 sm:p-4 group">
+                <Button asChild variant="ghost" size="lg" className="glass-effect border border-white/30 shadow-xl p-3 sm:p-4 group touch-target">
                   <a href={social.href} target="_blank" className={`transition-colors duration-300 ${social.color}`}>
                     {social.iconUrl ? (
                       <img 
