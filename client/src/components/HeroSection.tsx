@@ -17,6 +17,7 @@ export const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+  const x = useSpring(0, springConfig);
   const rotateX = useSpring(0, springConfig);
   const rotateY = useSpring(0, springConfig);
 
@@ -58,6 +59,7 @@ export const HeroSection = () => {
         
         setMousePosition({ x: mouseX, y: mouseY });
         
+        // Update spring values for 3D tilt effect
         const tiltX = (mouseY / rect.height) * -10;
         const tiltY = (mouseX / rect.width) * 10;
         
@@ -104,6 +106,18 @@ export const HeroSection = () => {
     }
   };
 
+  const floatingElementVariants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      transition: {
+        duration: 1,
+        ease: "easeOut"
+      }
+    }
+  };
+
   const itemVariants = {
     hidden: { y: 50, opacity: 0 },
     visible: {
@@ -118,232 +132,281 @@ export const HeroSection = () => {
   };
 
   return (
-    <motion.section 
-      ref={containerRef}
-      id="home" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-animated particles"
-      style={{ y, opacity }}
-    >
-      {/* Dynamic 3D Background */}
-      <motion.div 
-        className="absolute inset-0 z-0"
-        style={{ rotateX, rotateY }}
-      >
+    <section id="home" className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+      {/* 3D Background */}
+      <div className="absolute inset-0 z-0">
         <Hero3D />
-      </motion.div>
+      </div>
       
-      {/* Floating Elements with 3D Effects */}
-      <div className="absolute inset-0 z-10 perspective-1000">
-        {[...Array(30)].map((_, i) => (
+      {/* Enhanced Animated Background Elements */}
+      <div className="absolute inset-0 z-10">
+        {[...Array(80)].map((_, i) => (
           <motion.div
             key={i}
-            className={`absolute transform-3d ${
-              i % 4 === 0 ? 'w-4 h-4 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full glow' : 
-              i % 4 === 1 ? 'w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full glow-accent' : 
-              i % 4 === 2 ? 'w-2 h-2 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full' :
-              'w-6 h-1 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full'
+            className={`absolute rounded-full opacity-20 ${
+              i % 3 === 0 ? 'w-3 h-3 bg-blue-400' : 
+              i % 3 === 1 ? 'w-2 h-2 bg-purple-400' : 
+              'w-1 h-1 bg-cyan-400'
             }`}
             initial={{ 
               x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
               y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-              opacity: 0,
-              scale: 0,
-              rotateZ: 0
             }}
             animate={{
               y: [null, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800)],
               x: [null, Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200)],
-              opacity: [0, 0.8, 0],
-              scale: [0, 1.5, 0],
-              rotateZ: [0, 360, 720],
+              scale: [1, 1.5, 1],
+              opacity: [0.2, 0.6, 0.2],
             }}
             transition={{
-              duration: Math.random() * 20 + 15,
+              duration: Math.random() * 15 + 10,
               repeat: Infinity,
-              repeatType: "loop",
+              repeatType: "reverse",
               ease: "easeInOut",
-              delay: Math.random() * 5
             }}
-            whileHover={{ scale: 2, opacity: 1 }}
           />
         ))}
       </div>
 
-      {/* Glassmorphism Overlay */}
-      <div className="absolute inset-0 z-20 glass-subtle bg-grid"></div>
+      {/* Enhanced Gradient Overlay with better mobile support */}
+      <div className="absolute inset-0 z-20 bg-gradient-to-br from-blue-50/90 via-purple-50/80 to-indigo-100/90 dark:from-gray-900/95 dark:via-blue-900/90 dark:to-gray-800/95"></div>
       
-      <div className="relative z-30 max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="text-center space-y-8 lg:space-y-12 perspective-2000"
+          className="text-center space-y-6 lg:space-y-8 max-w-5xl mx-auto"
         >
-          {/* Main Heading */}
+          {/* Enhanced Main Heading with better mobile responsiveness */}
           <motion.div
-            variants={textVariants}
+            variants={itemVariants}
             className="perspective-1000"
           >
             <motion.h1 
-              className="text-responsive-4xl font-black text-gradient mb-4"
-              animate={{ 
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+              className="text-4xl sm:text-5xl lg:text-7xl font-black text-gray-900 dark:text-white transform-gpu"
+              style={{
+                textShadow: "0 10px 30px rgba(0,0,0,0.3)",
+                transform: "rotateX(10deg)",
               }}
-              transition={{ 
-                duration: 8, 
-                repeat: Infinity, 
-                ease: "linear" 
+              whileHover={{ 
+                scale: 1.05,
+                rotateX: 0,
+                textShadow: "0 20px 40px rgba(0,0,0,0.4)"
               }}
+              transition={{ duration: 0.3 }}
             >
-              Manoj Kumar K
+              Hi, I'm{" "}
+              <motion.span 
+                className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent"
+                animate={{ 
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                Manoj Kumar K
+              </motion.span>
             </motion.h1>
-            
-            <motion.div 
-              className="text-responsive-2xl font-bold text-gradient-accent h-16 flex items-center justify-center"
-              whileHover={{ scale: 1.05 }}
+          </motion.div>
+          
+          {/* Enhanced Animated Subtitle with better mobile sizing */}
+          <motion.div
+            variants={itemVariants}
+            className="perspective-1000"
+          >
+            <motion.h2 
+              className="text-2xl sm:text-3xl lg:text-4xl text-gray-700 dark:text-gray-200 transform-gpu"
+              style={{ transform: "rotateX(5deg)" }}
+              whileHover={{ rotateX: 0 }}
             >
-              <span className="mono">
-                {typedText}
-                <motion.span
-                  animate={{ opacity: [0, 1, 0] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                  className="text-primary"
+              <motion.span
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                I'm a{" "}
+              </motion.span>
+              <span className="relative">
+                <motion.span 
+                  className="bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent font-bold"
+                  animate={{ 
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  {typedText}
+                </motion.span>
+                <motion.span 
+                  className="text-blue-600 text-3xl lg:text-4xl"
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ duration: 0.8, repeat: Infinity }}
                 >
                   |
                 </motion.span>
               </span>
+            </motion.h2>
+          </motion.div>
+          
+          {/* Enhanced Description with better mobile padding */}
+          <motion.div
+            variants={itemVariants}
+            className="perspective-1000"
+          >
+            <motion.p 
+              className="text-lg sm:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-4xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-4 sm:p-6 shadow-2xl border border-white/20"
+              style={{ transform: "rotateX(5deg)" }}
+              whileHover={{ 
+                rotateX: 0,
+                scale: 1.02,
+                boxShadow: "0 25px 50px rgba(0,0,0,0.2)"
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              🚀 Experienced in identifying and resolving complex data challenges, delivering <strong>actionable insights</strong>, and supporting data-driven decision-making with expertise in machine learning, big data technologies, and financial analytics.
+            </motion.p>
+          </motion.div>
+          
+          {/* Enhanced Call to Action Buttons with better mobile layout */}
+          <motion.div 
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 justify-center"
+          >
+            <motion.div
+              whileHover={{ scale: 1.1, y: -5 }}
+              whileTap={{ scale: 0.95 }}
+              animate={{ 
+                boxShadow: [
+                  "0 0 20px rgba(59, 130, 246, 0.3)",
+                  "0 0 40px rgba(59, 130, 246, 0.6)",
+                  "0 0 20px rgba(59, 130, 246, 0.3)"
+                ]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <Button asChild size="lg" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold px-6 sm:px-8 py-4 text-base sm:text-lg shadow-2xl border-0">
+                <a href="https://drive.google.com/file/d/1I3trn1h04xdu1u-Exw6edlgC1PVmOi22/view?usp=sharing" target="_blank">
+                  <motion.div
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                  >
+                    <Download className="mr-2 sm:mr-3 h-5 sm:h-6 w-5 sm:w-6" />
+                  </motion.div>
+                  Download My Resume
+                  <ArrowRight className="ml-2 h-4 sm:h-5 w-4 sm:w-5" />
+                </a>
+              </Button>
+            </motion.div>
+            
+            <motion.div
+              whileHover={{ scale: 1.1, y: -5 }}
+              whileTap={{ scale: 0.95 }}
+              animate={{ 
+                borderColor: [
+                  "rgba(34, 197, 94, 0.5)",
+                  "rgba(34, 197, 94, 1)",
+                  "rgba(34, 197, 94, 0.5)"
+                ]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto border-2 border-green-500 hover:bg-green-500 hover:text-white font-bold px-6 sm:px-8 py-4 text-base sm:text-lg shadow-2xl">
+                <a href="#projects">
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <Sparkles className="mr-2 sm:mr-3 h-5 sm:h-6 w-5 sm:w-6" />
+                  </motion.div>
+                  View My Projects
+                  <ExternalLink className="ml-2 h-4 sm:h-5 w-4 sm:w-5" />
+                </a>
+              </Button>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.1, y: -5 }}
+              whileTap={{ scale: 0.95 }}
+              animate={{ 
+                backgroundColor: [
+                  "rgba(239, 68, 68, 0.1)",
+                  "rgba(239, 68, 68, 0.2)",
+                  "rgba(239, 68, 68, 0.1)"
+                ]
+              }}
+              transition={{ duration: 1.8, repeat: Infinity }}
+            >
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto border-2 border-red-500 hover:bg-red-500 hover:text-white font-bold px-6 sm:px-8 py-4 text-base sm:text-lg shadow-2xl">
+                <a href="#contact">
+                  <motion.div
+                    animate={{ rotate: [0, 15, -15, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <Zap className="mr-2 sm:mr-3 h-5 sm:h-6 w-5 sm:w-6" />
+                  </motion.div>
+                  Let's Work Together!
+                </a>
+              </Button>
             </motion.div>
           </motion.div>
 
-          {/* Description */}
-          <motion.p
+          {/* Enhanced Social Links with LeetCode and Kaggle icons */}
+          <motion.div 
             variants={itemVariants}
-            className="text-responsive-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
-          >
-            Transforming complex data into actionable insights with cutting-edge AI and machine learning solutions. 
-            Building the future of intelligent analytics, one algorithm at a time.
-          </motion.p>
-
-          {/* Floating Icons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex justify-center space-x-8 py-8"
+            className="flex justify-center space-x-4 sm:space-x-6"
           >
             {[
-              { icon: Brain, color: "from-purple-400 to-pink-400", delay: 0 },
-              { icon: Database, color: "from-blue-400 to-cyan-400", delay: 0.2 },
-              { icon: Code, color: "from-emerald-400 to-teal-400", delay: 0.4 },
-              { icon: Zap, color: "from-yellow-400 to-orange-400", delay: 0.6 }
-            ].map(({ icon: Icon, color, delay }, index) => (
+              { href: "https://github.com/manojkumartechie", icon: Github, color: "hover:text-gray-900" },
+              { href: "https://www.linkedin.com/in/manojkumartechie/", icon: Linkedin, color: "hover:text-blue-600" },
+              { 
+                href: "https://leetcode.com/manojkumartechie/", 
+                iconUrl: "https://img.icons8.com/?size=100&id=9L16NypUzu38&format=png&color=000000",
+                name: "LeetCode",
+                color: "hover:text-orange-500"
+              },
+              { 
+                href: "https://www.kaggle.com/manojkumartechie", 
+                iconUrl: "https://img.icons8.com/?size=100&id=Omk4fWoSmCHm&format=png&color=000000",
+                name: "Kaggle",
+                color: "hover:text-cyan-500"
+              }
+            ].map((social, index) => (
               <motion.div
-                key={index}
-                className={`p-4 glass rounded-2xl bg-gradient-to-r ${color} hover-float`}
-                initial={{ opacity: 0, y: 50, rotateY: -180 }}
-                animate={{ opacity: 1, y: 0, rotateY: 0 }}
-                transition={{ delay, duration: 0.8, type: "spring" }}
+                key={social.href}
                 whileHover={{ 
-                  scale: 1.2, 
+                  scale: 1.3, 
+                  y: -10,
                   rotateY: 360,
-                  transition: { duration: 0.6 }
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.3)"
                 }}
+                whileTap={{ scale: 0.9 }}
+                animate={{ 
+                  y: [0, -10, 0],
+                  rotateX: [0, 10, 0],
+                }}
+                transition={{ 
+                  duration: 3 + index * 0.5, 
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="perspective-1000"
               >
-                <Icon className="w-8 h-8 text-white" />
+                <Button asChild variant="ghost" size="lg" className="bg-white/20 backdrop-blur-md border border-white/30 shadow-xl p-3 sm:p-4 group">
+                  <a href={social.href} target="_blank" className={`transition-colors duration-300 ${social.color}`}>
+                    {social.iconUrl ? (
+                      <img 
+                        src={social.iconUrl} 
+                        alt={social.name || ""} 
+                        className="h-6 sm:h-8 w-6 sm:w-8 filter brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-300" 
+                      />
+                    ) : (
+                      <social.icon className="h-6 sm:h-8 w-6 sm:w-8" />
+                    )}
+                  </a>
+                </Button>
               </motion.div>
             ))}
           </motion.div>
-
-          {/* Enhanced Action Buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-          >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="perspective-1000"
-            >
-              <Button
-                size="lg"
-                className="glass-strong text-white font-bold px-8 py-4 text-lg rounded-2xl bg-gradient-to-r from-primary to-accent hover-lift glow group relative overflow-hidden"
-              >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 group-hover:opacity-100"
-                  transition={{ duration: 0.3 }}
-                />
-                <span className="relative z-10 flex items-center gap-3">
-                  <Download className="w-5 h-5" />
-                  Download Resume
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Button>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="perspective-1000"
-            >
-              <Button
-                variant="outline"
-                size="lg"
-                className="glass border-2 border-primary/50 text-primary font-bold px-8 py-4 text-lg rounded-2xl hover-lift hover:glow group"
-              >
-                <span className="flex items-center gap-3">
-                  <ExternalLink className="w-5 h-5" />
-                  View Projects
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Button>
-            </motion.div>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            variants={itemVariants}
-            className="flex justify-center space-x-6 pt-8"
-          >
-            {[
-              { href: "https://github.com/manojkumartechie", icon: Github, label: "GitHub" },
-              { href: "https://linkedin.com/in/manojkumartechie", icon: Linkedin, label: "LinkedIn" }
-            ].map(({ href, icon: Icon, label }) => (
-              <motion.a
-                key={href}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-4 glass rounded-2xl hover-float group"
-                whileHover={{ 
-                  scale: 1.2, 
-                  rotateY: 360,
-                  transition: { duration: 0.6 }
-                }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Icon className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
-                <span className="sr-only">{label}</span>
-              </motion.a>
-            ))}
-          </motion.div>
-
-          {/* Scroll Indicator */}
-          <motion.div
-            variants={itemVariants}
-            className="pt-16"
-          >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-6 h-10 border-2 border-primary/50 rounded-full mx-auto relative"
-            >
-              <motion.div
-                animate={{ y: [0, 16, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-1 h-3 bg-primary rounded-full absolute left-1/2 top-2 transform -translate-x-1/2"
-              />
-            </motion.div>
-          </motion.div>
         </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 };
