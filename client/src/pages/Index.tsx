@@ -15,13 +15,23 @@ const Index = () => {
     <PageTransition>
       <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-500">
         <Navigation />
-        <HeroSection />
-        <Interactive3DCTA />
-        <AboutSection />
-        <EducationSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <ContactSection />
+        <section id="home">
+          <HeroSection />
+          <Interactive3DCTA />
+        </section>
+        <section id="about">
+          <AboutSection />
+        </section>
+        <section id="skills">
+          <EducationSection />
+          <SkillsSection />
+        </section>
+        <section id="projects">
+          <ProjectsSection />
+        </section>
+        <section id="contact">
+          <ContactSection />
+        </section>
         <Footer />
       </div>
     </PageTransition>
