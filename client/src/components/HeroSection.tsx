@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Download, ExternalLink, Github, Linkedin, ArrowRight, Sparkles, Zap } from "lucide-react";
+import { Download, ExternalLink, Github, Linkedin, ArrowRight, Sparkles, Zap, Brain, Code, Database } from "lucide-react";
 import { Hero3D } from "@/components/Hero3D";
 
 export const HeroSection = () => {
@@ -9,8 +9,19 @@ export const HeroSection = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], [0, -500]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  
+  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+  const x = useSpring(0, springConfig);
+  const rotateX = useSpring(0, springConfig);
+  const rotateY = useSpring(0, springConfig);
 
-  const words = ["Data Analyst", "AI Engineer", "Business Intelligence Expert", "Machine Learning Specialist"];
+  const words = ["Data Scientist", "AI Engineer", "ML Specialist", "Analytics Expert"];
 
   useEffect(() => {
     const handleType = () => {
@@ -26,7 +37,7 @@ export const HeroSection = () => {
       setTypingSpeed(isDeleting ? 30 : 150);
 
       if (!isDeleting && typedText === fullText) {
-        setTimeout(() => setIsDeleting(true), 1000);
+        setTimeout(() => setIsDeleting(true), 2000);
       } else if (isDeleting && typedText === "") {
         setIsDeleting(false);
         setLoopNum(loopNum + 1);
@@ -37,13 +48,72 @@ export const HeroSection = () => {
     return () => clearTimeout(timer);
   }, [typedText, isDeleting, loopNum, typingSpeed, words]);
 
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const mouseX = event.clientX - centerX;
+        const mouseY = event.clientY - centerY;
+        
+        setMousePosition({ x: mouseX, y: mouseY });
+        
+        // Update spring values for 3D tilt effect
+        const tiltX = (mouseY / rect.height) * -10;
+        const tiltY = (mouseX / rect.width) * 10;
+        
+        rotateX.set(tiltX);
+        rotateY.set(tiltY);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [rotateX, rotateY]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
+        delayChildren: 0.5,
+        staggerChildren: 0.3,
+        duration: 1.2
+      }
+    }
+  };
+
+  const textVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 100,
+      scale: 0.8,
+      rotateX: -15
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotateX: 0,
+      transition: {
+        duration: 1.2,
+        ease: [0.25, 0.46, 0.45, 0.94],
+        type: "spring",
+        stiffness: 100,
+        damping: 15
+      }
+    }
+  };
+
+  const floatingElementVariants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      transition: {
+        duration: 1,
+        ease: "easeOut"
       }
     }
   };
