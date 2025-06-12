@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Download, ExternalLink, Github, Linkedin, ArrowRight, Sparkles, Zap, Brain, Code, Database } from "lucide-react";
+import { Download, ExternalLink, Github, Linkedin, ArrowRight, Sparkles, Zap, Brain, Code, Database, Rocket } from "lucide-react";
 import { Hero3D } from "@/components/Hero3D";
 
 export const HeroSection = () => {
@@ -268,24 +268,18 @@ export const HeroSection = () => {
             </motion.p>
           </motion.div>
           
-          {/* Enhanced Call to Action Buttons with responsive layout */}
+          {/* Enhanced Call to Action Buttons with distinctive shadows */}
           <motion.div 
             variants={itemVariants}
             className="flex flex-col sm:flex-row flex-wrap responsive-gap justify-center"
           >
+            {/* Primary CTA - Download Resume */}
             <motion.div
-              whileHover={{ scale: 1.1, y: -5 }}
+              whileHover={{ scale: 1.05, y: -8 }}
               whileTap={{ scale: 0.95 }}
-              animate={{ 
-                boxShadow: [
-                  "0 0 20px rgba(59, 130, 246, 0.3)",
-                  "0 0 40px rgba(59, 130, 246, 0.6)",
-                  "0 0 20px rgba(59, 130, 246, 0.3)"
-                ]
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
+              className="w-full sm:w-auto"
             >
-              <Button asChild size="lg" className="w-full sm:w-auto glossy-button text-primary-foreground font-bold px-6 sm:px-8 py-4 text-base sm:text-lg shadow-2xl border-0 touch-target">
+              <Button asChild size="lg" className="w-full sm:w-auto cta-button-primary text-white font-bold px-6 sm:px-8 py-4 text-base sm:text-lg border-0 touch-target rounded-2xl">
                 <a href="https://drive.google.com/file/d/1I3trn1h04xdu1u-Exw6edlgC1PVmOi22/view?usp=sharing" target="_blank">
                   <motion.div
                     animate={{ rotate: [0, 360] }}
@@ -299,19 +293,13 @@ export const HeroSection = () => {
               </Button>
             </motion.div>
             
+            {/* Secondary CTA - View Projects */}
             <motion.div
-              whileHover={{ scale: 1.1, y: -5 }}
+              whileHover={{ scale: 1.05, y: -8 }}
               whileTap={{ scale: 0.95 }}
-              animate={{ 
-                borderColor: [
-                  "rgba(34, 197, 94, 0.5)",
-                  "rgba(34, 197, 94, 1)",
-                  "rgba(34, 197, 94, 0.5)"
-                ]
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
+              className="w-full sm:w-auto"
             >
-              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto border-2 border-green-500 hover:bg-green-500 hover:text-white font-bold px-6 sm:px-8 py-4 text-base sm:text-lg shadow-2xl touch-target">
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto cta-button-secondary text-green-100 font-bold px-6 sm:px-8 py-4 text-base sm:text-lg touch-target rounded-2xl">
                 <a href="#projects">
                   <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
@@ -325,19 +313,13 @@ export const HeroSection = () => {
               </Button>
             </motion.div>
 
+            {/* Tertiary CTA - Let's Work Together */}
             <motion.div
-              whileHover={{ scale: 1.1, y: -5 }}
+              whileHover={{ scale: 1.05, y: -8 }}
               whileTap={{ scale: 0.95 }}
-              animate={{ 
-                backgroundColor: [
-                  "rgba(239, 68, 68, 0.1)",
-                  "rgba(239, 68, 68, 0.2)",
-                  "rgba(239, 68, 68, 0.1)"
-                ]
-              }}
-              transition={{ duration: 1.8, repeat: Infinity }}
+              className="w-full sm:w-auto"
             >
-              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto border-2 border-red-500 hover:bg-red-500 hover:text-white font-bold px-6 sm:px-8 py-4 text-base sm:text-lg shadow-2xl touch-target">
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto cta-button-tertiary text-red-100 font-bold px-6 sm:px-8 py-4 text-base sm:text-lg touch-target rounded-2xl">
                 <a href="#contact">
                   <motion.div
                     animate={{ rotate: [0, 15, -15, 0] }}

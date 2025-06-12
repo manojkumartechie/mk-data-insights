@@ -155,34 +155,23 @@ export const Interactive3DCTA = () => {
             Let's unlock powerful insights from your data and drive your business to new heights!
           </motion.p>
           
-          {/* Interactive CTA Buttons */}
+          {/* Interactive CTA Buttons with Enhanced Shadows */}
           <motion.div
             className="flex flex-col sm:flex-row flex-wrap responsive-gap justify-center"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1, duration: 0.6, type: "spring" }}
           >
-            {/* Primary CTA */}
+            {/* Primary CTA - Start Your Data Journey */}
             <motion.div
-              whileHover={{ scale: 1.15, y: -10 }}
+              whileHover={{ scale: 1.1, y: -12 }}
               whileTap={{ scale: 0.95 }}
-              animate={{
-                boxShadow: [
-                  "0 0 30px rgba(59, 130, 246, 0.5)",
-                  "0 0 60px rgba(59, 130, 246, 0.8)",
-                  "0 0 30px rgba(59, 130, 246, 0.5)"
-                ],
-                y: [0, -8, 0],
-              }}
-              transition={{ 
-                boxShadow: { duration: 2, repeat: Infinity },
-                y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-              }}
+              className="w-full sm:w-auto"
             >
               <Button 
                 asChild 
                 size="lg" 
-                className="w-full sm:w-auto glossy-button text-white font-bold px-6 sm:px-8 lg:px-12 py-4 sm:py-6 text-base sm:text-lg lg:text-xl shadow-2xl border-0 rounded-2xl touch-target"
+                className="w-full sm:w-auto cta-button-primary text-white font-bold px-6 sm:px-8 lg:px-12 py-4 sm:py-6 text-base sm:text-lg lg:text-xl border-0 rounded-2xl touch-target"
               >
                 <a href="#contact">
                   <motion.div
@@ -197,28 +186,17 @@ export const Interactive3DCTA = () => {
               </Button>
             </motion.div>
             
-            {/* Secondary CTA */}
+            {/* Secondary CTA - Let's Work Together */}
             <motion.div
-              whileHover={{ scale: 1.15, y: -10 }}
+              whileHover={{ scale: 1.1, y: -12 }}
               whileTap={{ scale: 0.95 }}
-              animate={{
-                borderColor: [
-                  "rgba(34, 197, 94, 0.5)",
-                  "rgba(34, 197, 94, 1)",
-                  "rgba(34, 197, 94, 0.5)"
-                ],
-                y: [0, -5, 0],
-              }}
-              transition={{ 
-                borderColor: { duration: 2.5, repeat: Infinity },
-                y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-              }}
+              className="w-full sm:w-auto"
             >
               <Button 
                 asChild 
                 variant="outline" 
                 size="lg" 
-                className="w-full sm:w-auto border-4 border-green-400 glass-effect hover:bg-green-400 hover:text-gray-900 text-green-100 font-bold px-6 sm:px-8 lg:px-12 py-4 sm:py-6 text-base sm:text-lg lg:text-xl shadow-2xl rounded-2xl touch-target"
+                className="w-full sm:w-auto cta-button-secondary text-green-100 font-bold px-6 sm:px-8 lg:px-12 py-4 sm:py-6 text-base sm:text-lg lg:text-xl rounded-2xl touch-target"
               >
                 <a href="#projects">
                   <motion.div
@@ -227,7 +205,7 @@ export const Interactive3DCTA = () => {
                   >
                     <Sparkles className="mr-2 sm:mr-3 lg:mr-4 h-5 sm:h-6 lg:h-8 w-5 sm:w-6 lg:w-8" />
                   </motion.div>
-                  Explore My Work
+                  Let's Work Together
                   <Zap className="ml-2 sm:ml-3 lg:ml-4 h-5 sm:h-6 lg:h-8 w-5 sm:w-6 lg:w-8" />
                 </a>
               </Button>
