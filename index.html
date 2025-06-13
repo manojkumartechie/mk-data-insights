@@ -1,13 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manoj Kumar K - Data Scientist & AI Engineer</title>
-    <meta name="description" content="Experienced Data Scientist and AI Engineer specializing in machine learning, financial analytics, and big data technologies." />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <meta name="description" content="Experienced Data Scientist and AI Engineer specializing in machine learning, financial analytics, and big data technologies.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span>Manoj Kumar K</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Hi, I'm <span class="gradient-text">Manoj Kumar K</span>
+            </h1>
+            <h2 class="hero-subtitle">
+                I'm a <span id="typed-text" class="typed-text"></span><span class="cursor">|</span>
+            </h2>
+            <p class="hero-description">
+                🚀 Experienced in identifying and resolving complex data challenges, delivering 
+                <strong>actionable insights</strong>, and supporting data-driven decision-making with 
+                expertise in machine learning, big data technologies, and financial analytics.
+            </p>
+            <div class="hero-buttons">
+                <a href="https://drive.google.com/file/d/1I3trn1h04xdu1u-Exw6edlgC1PVmOi22/view?usp=sharing" 
+                   target="_blank" class="btn btn-primary">
+                    <i class="fas fa-download"></i>
+                    Download Resume
+                </a>
+                <a href="#projects" class="btn btn-secondary">
+                    <i class="fas fa-rocket"></i>
+                    View Projects
+                </a>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/manojkumartechie" target="_blank" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/manojkumartechie/" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://leetcode.com/manojkumartechie/" target="_blank" class="social-link">
+                    <i class="fas fa-code"></i>
+                </a>
+                <a href="https://www.kaggle.com/manojkumartechie" target="_blank" class="social-link">
+                    <i class="fab fa-kaggle"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Professional Summary</h3>
+                    <p>
+                        Dedicated Data Analyst with extensive experience in developing predictive analytics platforms, 
+                        fraud detection systems, and financial risk models. Specialized in leveraging Python, machine learning, 
+                        and big data technologies to drive data-driven decision making.
+                    </p>
+                    <p>
+                        Proven track record in implementing end-to-end data solutions from ETL pipelines to interactive 
+                        dashboards, with expertise in cloud deployment and real-time analytics systems.
+                    </p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 7826807488</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>manojkumar9384@outlook.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Dindigul, Tamil Nadu, India</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-skills">
+                    <h3>Core Strengths</h3>
+                    <div class="strength-item">
+                        <i class="fas fa-chart-line"></i>
+                        <div>
+                            <h4>Data Analytics</h4>
+                            <p>Advanced statistical analysis and predictive modeling</p>
+                        </div>
+                    </div>
+                    <div class="strength-item">
+                        <i class="fas fa-brain"></i>
+                        <div>
+                            <h4>Machine Learning</h4>
+                            <p>Deep learning, time series forecasting, and risk assessment</p>
+                        </div>
+                    </div>
+                    <div class="strength-item">
+                        <i class="fas fa-chart-pie"></i>
+                        <div>
+                            <h4>Financial Analytics</h4>
+                            <p>Portfolio optimization, fraud detection, and risk management</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid" id="skills-grid">
+                <!-- Skills will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="ai">AI/ML</button>
+                <button class="filter-btn" data-filter="analytics">Analytics</button>
+                <button class="filter-btn" data-filter="fintech">FinTech</button>
+            </div>
+            <div class="projects-grid" id="projects-grid">
+                <!-- Projects will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>manojkumar9384@outlook.com</p>
+                    <a href="mailto:manojkumar9384@outlook.com" class="btn btn-outline">Send Email</a>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Phone</h3>
+                    <p>+91 7826807488</p>
+                    <a href="tel:+917826807488" class="btn btn-outline">Call Now</a>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-globe"></i>
+                    <h3>Social</h3>
+                    <p>Connect with me online</p>
+                    <div class="social-links-contact">
+                        <a href="https://www.linkedin.com/in/manojkumartechie/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/manojkumartechie" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://leetcode.com/manojkumartechie/" target="_blank">
+                            <i class="fas fa-code"></i>
+                        </a>
+                        <a href="https://www.kaggle.com/manojkumartechie" target="_blank">
+                            <i class="fab fa-kaggle"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Manoj Kumar K. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script src="main.js"></script>
+</body>
 </html>
